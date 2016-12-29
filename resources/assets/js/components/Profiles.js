@@ -1,4 +1,4 @@
-import React, { Profile } from 'react'
+import React, { Component } from 'react'
 import { connect, PromiseState } from 'react-refetch'
 import { Link } from 'react-router'
 import PromiseStateContainer from './PromiseStateContainer'
@@ -15,7 +15,7 @@ class Profiles extends Component {
               {profiles.map((profile) => {
                 return (
                   <li key={profile.id}>
-                    <Link to={`/moments/${profile.id}`}>{profile.first_name}{profile.last_name}</Link>
+                    <Link to={`/profiles/${profile.id}`}>{profile.first_name}{profile.last_name}</Link>
                   </li>
                 )
               })}
@@ -30,4 +30,4 @@ class Profiles extends Component {
 
 export default connect(props => ({
   profilesFetch: '/api/profiles',
-}))(Moments)
+}))(Profiles)

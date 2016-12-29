@@ -15,6 +15,14 @@ var _componentsApp = require('./components/App');
 
 var _componentsApp2 = _interopRequireDefault(_componentsApp);
 
+var _componentsProfiles = require('./components/Profiles');
+
+var _componentsProfiles2 = _interopRequireDefault(_componentsProfiles);
+
+var _componentsProfile = require('./components/Profile');
+
+var _componentsProfile2 = _interopRequireDefault(_componentsProfile);
+
 var _componentsMoments = require('./components/Moments');
 
 var _componentsMoments2 = _interopRequireDefault(_componentsMoments);
@@ -33,13 +41,15 @@ var _componentsNoMatch2 = _interopRequireDefault(_componentsNoMatch);
   _react2['default'].createElement(
     _reactRouter.Route,
     { path: '/', component: _componentsApp2['default'] },
+    _react2['default'].createElement(_reactRouter.Route, { path: '/profiles', component: _componentsProfiles2['default'] }),
+    _react2['default'].createElement(_reactRouter.Route, { path: '/profiles/:profileId', component: _componentsProfile2['default'] }),
     _react2['default'].createElement(_reactRouter.Route, { path: '/moments', component: _componentsMoments2['default'] }),
     _react2['default'].createElement(_reactRouter.Route, { path: '/moments/:momentId', component: _componentsMoment2['default'] }),
     _react2['default'].createElement(_reactRouter.Route, { path: '*', component: _componentsNoMatch2['default'] })
   )
 ), document.getElementById('app'));
 
-},{"./components/App":251,"./components/Moment":254,"./components/Moments":255,"./components/NoMatch":256,"react":247,"react-dom":49,"react-router":213}],2:[function(require,module,exports){
+},{"./components/App":251,"./components/Moment":254,"./components/Moments":255,"./components/NoMatch":256,"./components/Profile":257,"./components/Profiles":258,"react":247,"react-dom":49,"react-router":213}],2:[function(require,module,exports){
 var pSlice = Array.prototype.slice;
 var objectKeys = require('./lib/keys.js');
 var isArguments = require('./lib/is_arguments.js');
@@ -26935,19 +26945,6 @@ var App = (function (_Component) {
             'Laravel + React example app'
           )
         ),
-        _react2['default'].createElement(
-          'ul',
-          null,
-          _react2['default'].createElement(
-            'li',
-            null,
-            _react2['default'].createElement(
-              _reactRouter.Link,
-              { to: '/moments' },
-              'Moments'
-            )
-          )
-        ),
         this.props.children
       );
     }
@@ -27122,7 +27119,7 @@ exports['default'] = (0, _reactRefetch.connect)(function (props) {
 })(Moment);
 module.exports = exports['default'];
 
-},{"./PromiseStateContainer":257,"react":247,"react-refetch":179}],255:[function(require,module,exports){
+},{"./PromiseStateContainer":259,"react":247,"react-refetch":179}],255:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -27202,7 +27199,7 @@ exports['default'] = (0, _reactRefetch.connect)(function (props) {
 })(Moments);
 module.exports = exports['default'];
 
-},{"./PromiseStateContainer":257,"react":247,"react-refetch":179,"react-router":213}],256:[function(require,module,exports){
+},{"./PromiseStateContainer":259,"react":247,"react-refetch":179,"react-router":213}],256:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -27250,6 +27247,188 @@ exports['default'] = NoMatch;
 module.exports = exports['default'];
 
 },{"react":247}],257:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i['return']) _i['return'](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError('Invalid attempt to destructure non-iterable instance'); } }; })();
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRefetch = require('react-refetch');
+
+var _reactRouter = require('react-router');
+
+var _PromiseStateContainer = require('./PromiseStateContainer');
+
+var _PromiseStateContainer2 = _interopRequireDefault(_PromiseStateContainer);
+
+var Profile = (function (_Component) {
+  _inherits(Profile, _Component);
+
+  function Profile() {
+    _classCallCheck(this, Profile);
+
+    _get(Object.getPrototypeOf(Profile.prototype), 'constructor', this).apply(this, arguments);
+  }
+
+  _createClass(Profile, [{
+    key: 'render',
+    value: function render() {
+      return _react2['default'].createElement(_PromiseStateContainer2['default'], {
+        ps: _reactRefetch.PromiseState.all([this.props.profilesFetch, this.props.momentsFetch]),
+        onFulfillment: function (_ref) {
+          var _ref2 = _slicedToArray(_ref, 2);
+
+          var profile = _ref2[0];
+          var moments = _ref2[1];
+
+          return _react2['default'].createElement(
+            'div',
+            { className: 'profile__info' },
+            _react2['default'].createElement(
+              'p',
+              null,
+              profile.first_name
+            ),
+            _react2['default'].createElement(
+              'p',
+              null,
+              profile.last_name
+            ),
+            _react2['default'].createElement(
+              'p',
+              null,
+              profile.date_of_birth
+            ),
+            _react2['default'].createElement(
+              'ul',
+              null,
+              moments.map(function (moment) {
+                return _react2['default'].createElement(
+                  'li',
+                  { key: moment.id },
+                  _react2['default'].createElement(
+                    _reactRouter.Link,
+                    { to: '/moments/' + moment.id },
+                    moment.name
+                  )
+                );
+              })
+            )
+          );
+        }
+      });
+    }
+  }]);
+
+  return Profile;
+})(_react.Component);
+
+exports['default'] = (0, _reactRefetch.connect)(function (props) {
+  return {
+    profilesFetch: '/api/profiles/' + props.params.profileId,
+    momentsFetch: '/api/moments'
+  };
+})(Profile);
+module.exports = exports['default'];
+
+},{"./PromiseStateContainer":259,"react":247,"react-refetch":179,"react-router":213}],258:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i['return']) _i['return'](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError('Invalid attempt to destructure non-iterable instance'); } }; })();
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRefetch = require('react-refetch');
+
+var _reactRouter = require('react-router');
+
+var _PromiseStateContainer = require('./PromiseStateContainer');
+
+var _PromiseStateContainer2 = _interopRequireDefault(_PromiseStateContainer);
+
+var Profiles = (function (_Component) {
+  _inherits(Profiles, _Component);
+
+  function Profiles() {
+    _classCallCheck(this, Profiles);
+
+    _get(Object.getPrototypeOf(Profiles.prototype), 'constructor', this).apply(this, arguments);
+  }
+
+  _createClass(Profiles, [{
+    key: 'render',
+    value: function render() {
+      return _react2['default'].createElement(_PromiseStateContainer2['default'], {
+        ps: _reactRefetch.PromiseState.all([this.props.profilesFetch]),
+        onFulfillment: function (_ref) {
+          var _ref2 = _slicedToArray(_ref, 1);
+
+          var profiles = _ref2[0];
+
+          return _react2['default'].createElement(
+            'ul',
+            null,
+            profiles.map(function (profile) {
+              return _react2['default'].createElement(
+                'li',
+                { key: profile.id },
+                _react2['default'].createElement(
+                  _reactRouter.Link,
+                  { to: '/profiles/' + profile.id },
+                  profile.first_name,
+                  profile.last_name
+                )
+              );
+            })
+          );
+        }
+      });
+    }
+  }]);
+
+  return Profiles;
+})(_react.Component);
+
+exports['default'] = (0, _reactRefetch.connect)(function (props) {
+  return {
+    profilesFetch: '/api/profiles'
+  };
+})(Profiles);
+module.exports = exports['default'];
+
+},{"./PromiseStateContainer":259,"react":247,"react-refetch":179,"react-router":213}],259:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {

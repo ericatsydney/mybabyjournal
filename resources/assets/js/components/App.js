@@ -8,10 +8,6 @@ class App extends Component {
       <div>
         <h1><Link to="/">Laravel + React example app</Link></h1>
 
-        <ul>
-          <li><Link to="/moments">Moments</Link></li>
-        </ul>
-
         {this.props.children}
       </div>
     )

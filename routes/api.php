@@ -25,3 +25,9 @@ Route::delete('moments/{id}',   'MomentController@destroy');
 //Route::get('moments/{id}/edit',   'MomentController@edit');
 //Route::put('moments/{id}',  'MomentController@update');
 //Route::patch('moments/{id}',  'MomentController@update');
+
+// Profiles routes
+Route::get('profiles',  'ProfileController@index');
+Route::get('profiles/{id}',   'ProfileController@show');
+Route::post('profiles',  'ProfileController@store');
+Route::delete('profiles/{id}',   'ProfileController@destroy');
