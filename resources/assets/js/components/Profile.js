@@ -35,5 +35,5 @@ class Profile extends Component {
 
 export default connect(props => ({
   profilesFetch: `/api/profiles/${props.params.profileId}`,
-  momentsFetch: '/api/moments',
+  momentsFetch: `/api/profiles/${props.params.profileId}/moments`,
 }))(Profile)

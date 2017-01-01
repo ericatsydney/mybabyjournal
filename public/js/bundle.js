@@ -27342,7 +27342,7 @@ var Profile = (function (_Component) {
 exports['default'] = (0, _reactRefetch.connect)(function (props) {
   return {
     profilesFetch: '/api/profiles/' + props.params.profileId,
-    momentsFetch: '/api/moments'
+    momentsFetch: '/api/profiles/' + props.params.profileId + '/moments'
   };
 })(Profile);
 module.exports = exports['default'];

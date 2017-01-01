@@ -17,17 +17,14 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
 
-// Moments routes
-Route::get('moments',  'MomentController@index');
-Route::get('moments/{id}',   'MomentController@show');
-Route::post('moments',  'MomentController@store');
-Route::delete('moments/{id}',   'MomentController@destroy');
-//Route::get('moments/{id}/edit',   'MomentController@edit');
-//Route::put('moments/{id}',  'MomentController@update');
-//Route::patch('moments/{id}',  'MomentController@update');
-
 // Profiles routes
-Route::get('profiles',  'ProfileController@index');
-Route::get('profiles/{id}',   'ProfileController@show');
-Route::post('profiles',  'ProfileController@store');
-Route::delete('profiles/{id}',   'ProfileController@destroy');
+Route::resource('profiles', 'ProfileController',
+  ['only' => ['index', 'show', 'store', 'destroy']]);
+
+// Moments routes
+Route::resource('moments', 'MomentController',
+  ['only' => ['index', 'show', 'store', 'destroy']]);
+
+// Profiles/Moments routes
+Route::resource('profiles.moments', 'ProfileMomentController',
+  ['only' => ['index', 'show', 'store', 'destroy']]);
