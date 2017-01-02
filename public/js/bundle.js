@@ -26935,7 +26935,7 @@ var App = (function (_Component) {
     value: function render() {
       return _react2['default'].createElement(
         'div',
-        null,
+        { className: 'col-xs-12' },
         _react2['default'].createElement(
           'h1',
           null,
@@ -27317,11 +27317,11 @@ var Profile = (function (_Component) {
             ),
             _react2['default'].createElement(
               'ul',
-              null,
+              { className: 'list-group' },
               moments.map(function (moment) {
                 return _react2['default'].createElement(
                   'li',
-                  { key: moment.id },
+                  { key: moment.id, className: 'list-item' },
                   _react2['default'].createElement(
                     _reactRouter.Link,
                     { to: '/moments/' + moment.id },

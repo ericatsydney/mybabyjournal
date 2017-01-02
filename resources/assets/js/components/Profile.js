@@ -15,10 +15,10 @@ class Profile extends Component {
               <p>{profile.first_name}</p>
               <p>{profile.last_name}</p>
               <p>{profile.date_of_birth}</p>
-              <ul>
+              <ul className="list-group">
                 {moments.map((moment) => {
                   return (
-                    <li key={moment.id}>
+                    <li key={moment.id} className="list-item">
                       <Link to={`/moments/${moment.id}`}>{moment.name}</Link>
                     </li>
                   )
