@@ -13,6 +13,13 @@
 |
 */
 
+// This is for the auth scaffolding.
+// @todo will be refactored later.
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
+
+// This is the index template for react routing.
 Route::get('{slug}', function() {
     return view('index');
 })

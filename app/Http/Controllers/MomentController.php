@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 use App\Moment;
 
 class MomentController extends Controller
-{
+{ 
+  public function __construct() {
+    $this->middleware('auth');
+  }
   public function index() {
     $moments = Moment::all();
     return $moments;
