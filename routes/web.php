@@ -18,6 +18,9 @@
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+Route::get('/', function() {
+  return view('welcome');
+});
 
 // This is the index template for react routing.
 Route::get('{slug}', function() {

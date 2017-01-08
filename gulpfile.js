@@ -1,7 +1,7 @@
 const elixir = require('laravel-elixir');
 
 //require('laravel-elixir-vue-2');
-require('laravel-elixir-livereload');
+//require('laravel-elixir-livereload');
 elixir.config.sourcemaps = false;
 /*
  |--------------------------------------------------------------------------
@@ -16,7 +16,7 @@ elixir.config.sourcemaps = false;
 
 elixir(mix => {
     mix.sass('app.scss')
-	.browserify('app.js')
+	.browserify('app.js');
 	//.webpack('app.js')
-	.livereload();
+	//.livereload();
 });
