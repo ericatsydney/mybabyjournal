@@ -1,10 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { connect, PromiseState } from 'react-refetch'
 import { Link } from 'react-router'
 import PromiseStateContainer from './PromiseStateContainer'
 
 class Profile extends Component {
-
   render() {
     return (
       <PromiseStateContainer
@@ -33,7 +32,12 @@ class Profile extends Component {
 
 }
 
-export default connect(props => ({
-  profilesFetch: `/api/profiles/${props.params.profileId}`,
+export default connect((props, context) => ({
+  profilesFetch: {
+    url: `/api/profiles/${props.params.profileId}`,
+    headers: {
+      'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    }
+  },
   momentsFetch: `/api/profiles/${props.params.profileId}/moments`,
 }))(Profile)

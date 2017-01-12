@@ -27339,9 +27339,14 @@ var Profile = (function (_Component) {
   return Profile;
 })(_react.Component);
 
-exports['default'] = (0, _reactRefetch.connect)(function (props) {
+exports['default'] = (0, _reactRefetch.connect)(function (props, context) {
   return {
-    profilesFetch: '/api/profiles/' + props.params.profileId,
+    profilesFetch: {
+      url: '/api/profiles/' + props.params.profileId,
+      headers: {
+        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+      }
+    },
     momentsFetch: '/api/profiles/' + props.params.profileId + '/moments'
   };
 })(Profile);

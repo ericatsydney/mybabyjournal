@@ -8,7 +8,7 @@ use App\Moment;
 class MomentController extends Controller
 { 
   public function __construct() {
-    $this->middleware('auth:api');
+//    $this->middleware('auth:api');
   }
   public function index() {
     $moments = Moment::all();
