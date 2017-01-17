@@ -17,6 +17,8 @@ class CreateMomentsTable extends Migration
             $table->increments('id');
 	    $table->string('profile_id');
             $table->string('name');
+            $table->mediumText('photos');  // this is the serialized array, include path, caption
+            $table->text('description');
             $table->timestamps();
         });
     }

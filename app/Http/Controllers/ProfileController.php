@@ -29,6 +29,8 @@ class ProfileController extends Controller
    */
   public function store(Request $request)
   {
+      // When create profile, some moments will be created automatically
+      // e.g. due date/ first date out/ start crawling/ start teething
       $profile = new Profile;
       $profile->first_name = $request->get('first_name');
       $profile->last_name = $request->get('last_name');

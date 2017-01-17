@@ -19562,7 +19562,8 @@ function connect(mapPropsToRequestsToProps) {
     }, mapping, {
       headers: Object.assign({
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
       }, mapping.headers)
     });
   }
@@ -19806,6 +19807,7 @@ function connect(mapPropsToRequestsToProps) {
     return (0, _hoistNonReactStatics2.default)(RefetchConnect, WrappedComponent);
   };
 }
+
 }).call(this,require('_process'))
 },{"../PromiseState":177,"../utils/deepValue":180,"../utils/errors":181,"../utils/isPlainObject":182,"../utils/shallowEqual":183,"_process":47,"hoist-non-react-statics":45,"invariant":46,"react":247,"whatwg-fetch":250}],179:[function(require,module,exports){
 'use strict';
@@ -27339,13 +27341,13 @@ var Profile = (function (_Component) {
   return Profile;
 })(_react.Component);
 
+var refetch = _reactRefetch.connect;
+// @todo Modified react-refetch/lib/components/connect.js to add xsrf token in.
+// @todo Need to rewrite it in custom components.
 exports['default'] = (0, _reactRefetch.connect)(function (props, context) {
   return {
     profilesFetch: {
-      url: '/api/profiles/' + props.params.profileId,
-      headers: {
-        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-      }
+      url: '/api/profiles/' + props.params.profileId
     },
     momentsFetch: '/api/profiles/' + props.params.profileId + '/moments'
   };

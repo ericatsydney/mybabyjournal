@@ -17,6 +17,8 @@ class CreateProfilesTable extends Migration
             $table->increments('id');
 	    $table->string('first_name');
 	    $table->string('last_name');
+            $table->text('avatar'); // this is the single file path 
+            $table->string('gender', 5); // boy or girl
 	    $table->date('date_of_birth');
             $table->timestamps();
         });

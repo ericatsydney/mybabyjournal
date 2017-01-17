@@ -32,12 +32,11 @@ class Profile extends Component {
 
 }
 
+// @todo Modified react-refetch/lib/components/connect.js to add xsrf token in.
+// @todo Need to rewrite it in custom components.
 export default connect((props, context) => ({
   profilesFetch: {
     url: `/api/profiles/${props.params.profileId}`,
-    headers: {
-      'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-    }
   },
   momentsFetch: `/api/profiles/${props.params.profileId}/moments`,
 }))(Profile)
