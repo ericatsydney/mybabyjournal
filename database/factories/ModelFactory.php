@@ -30,16 +30,20 @@ $factory->define(Profile::class, function (Faker $faker) {
   return [
     'first_name' => $faker->firstName,
     'last_name' => $faker->lastName,
+    'gender' => 'girl',
+    'avatar' => 'avatar.jpg',
     'date_of_birth' => $faker->date,
   ];
 });
 
 $factory->define(Moment::class, function (Faker $faker) {
   return [
-    'name' => $faker->title,
+    'name' => $faker->sentence($nbWords = 5, $variableNbWords = true),
     'profile_id' => function() {
        return factory(App\Profile::class)->create()->id;
-    }
+    },
+    'description' => 'description goes here',
+    'photos' => '{test}',
   ];
 });
 
