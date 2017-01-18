@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Moment extends Model
 {
-  protected $fillable = ['profile_id', 'name'];
+  protected $fillable = ['profile_id', 'name', 'photos', 'description'];
 
   /**
    * Moment belong to one profile.

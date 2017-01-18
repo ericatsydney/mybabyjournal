@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Profile extends Model
 {
-  protected $fillable = ['first_name', 'last_name', 'date_of_birth'];
+  protected $fillable = ['first_name', 'last_name', 'date_of_birth', 'avatar', 'gender'];
 
   /**
    * Each profiel could have many moments.

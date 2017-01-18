@@ -8,7 +8,7 @@ use App\Moment;
 class ProfileMomentController extends Controller
 {
   public function __construct() {
-    $this->middleware('auth:api');
+//    $this->middleware('auth:api');
   }
     /**
      * Display a listing of the resource.
@@ -35,8 +35,18 @@ class ProfileMomentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
-        //
+    public function store(Request $request, $profile_id) {
+      $moment = new Moment;
+      $moment->name = $request->get('name');
+      $moment->photos = $request->get('photos');
+      $moment->description = $request->get('description');
+      $moment->profile_id = $profile_id;
+      if ($moment->save()) {
+        return 'succeed';
+      }
+      else {
+	return 'fail';
+      }
     }
 
     /**

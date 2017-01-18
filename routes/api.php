@@ -19,7 +19,7 @@ Route::get('/user', function (Request $request) {
 
 // Profiles routes
 Route::resource('profiles', 'ProfileController',
-  ['only' => ['index', 'show', 'store', 'destroy']]);
+  ['only' => ['index', 'show', 'store', 'destroy', 'update']]);
 
 // Moments routes
 Route::resource('moments', 'MomentController',
@@ -27,4 +27,4 @@ Route::resource('moments', 'MomentController',
 
 // Profiles/Moments routes
 Route::resource('profiles.moments', 'ProfileMomentController',
-  ['only' => ['index', 'show', 'store', 'destroy']]);
+  ['only' => ['index', 'show', 'store', 'destroy', 'update']]);
