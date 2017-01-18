@@ -55,8 +55,14 @@ class ProfileMomentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id) {
-        //
+    public function show($profile_id, $id) {
+      $moment = Moment::where('profile_id', $profile_id)
+     	      ->where('id', $id)
+     	      ->first();
+      if ($moment !== null) {
+        return $moment;
+      }
+      return 'fail';
     }
 
     /**
@@ -86,7 +92,16 @@ class ProfileMomentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id) {
-        //
+    public function destroy($profile_id, $id) {
+      $moment = Moment::findOrFail($id);
+      if(!$moment) {
+          throw new NotFoundHttpException;
+      }
+      if($moment->delete()) {
+        return 'succeed';
+      }
+      else {
+	return 'fail';
+      }
     }
 }

@@ -11,6 +11,7 @@ class MomentController extends Controller
     $this->middleware('auth:api');
   }
   public function index() {
+	  // @todo add checking the user authorization.
     $moments = Moment::all();
     return $moments;
   }
