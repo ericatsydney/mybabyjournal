@@ -27485,8 +27485,16 @@ var Profile = (function (_Component7) {
           return _react2['default'].createElement(
             'div',
             { className: 'profile__info' },
-            _react2['default'].createElement(ProfileList, { profiles: profiles, activeProfileId: profile.id }),
-            _react2['default'].createElement(MomentList, { moments: moments })
+            _react2['default'].createElement(
+              'div',
+              { className: 'col-xs-2' },
+              _react2['default'].createElement(ProfileList, { profiles: profiles, activeProfileId: profile.id })
+            ),
+            _react2['default'].createElement(
+              'div',
+              { className: 'col-xs-10' },
+              _react2['default'].createElement(MomentList, { moments: moments })
+            )
           );
         }
       });

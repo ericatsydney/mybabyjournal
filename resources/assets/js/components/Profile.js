@@ -96,15 +96,18 @@ class Profile extends Component {
         onFulfillment={([profiles, profile, moments]) => {
           return (
             <div className="profile__info">
-	      <ProfileList profiles={profiles} activeProfileId={profile.id}/>
-	      <MomentList moments={moments} />
+              <div className="col-xs-2">
+	        <ProfileList profiles={profiles} activeProfileId={profile.id}/>
+	      </div>
+              <div className="col-xs-10">
+	        <MomentList moments={moments} />
+	      </div>
 	    </div>
           )
         }}
       />
     )
   }
-
 }
 
 // @todo Modified react-refetch/lib/components/connect.js to add xsrf token in.
