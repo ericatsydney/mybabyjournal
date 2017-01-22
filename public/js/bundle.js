@@ -27279,8 +27279,187 @@ var _PromiseStateContainer = require('./PromiseStateContainer');
 
 var _PromiseStateContainer2 = _interopRequireDefault(_PromiseStateContainer);
 
-var Profile = (function (_Component) {
-  _inherits(Profile, _Component);
+var ProfileList = (function (_Component) {
+  _inherits(ProfileList, _Component);
+
+  function ProfileList() {
+    _classCallCheck(this, ProfileList);
+
+    _get(Object.getPrototypeOf(ProfileList.prototype), 'constructor', this).apply(this, arguments);
+  }
+
+  _createClass(ProfileList, [{
+    key: 'render',
+    value: function render() {
+      return _react2['default'].createElement(
+        'ul',
+        { className: 'profile-list' },
+        this.props.profiles.map(function (profile) {
+          return _react2['default'].createElement(ProfileListItem, {
+            key: profile.id,
+            firstName: profile.first_name,
+            lastName: profile.last_name,
+            gender: profile.gender,
+            profileId: profile.id,
+            avatar: profile.avatar,
+            dateOfBirth: profile.date_of_birth
+          });
+        })
+      );
+    }
+  }]);
+
+  return ProfileList;
+})(_react.Component);
+
+var ProfileListItem = (function (_Component2) {
+  _inherits(ProfileListItem, _Component2);
+
+  function ProfileListItem() {
+    _classCallCheck(this, ProfileListItem);
+
+    _get(Object.getPrototypeOf(ProfileListItem.prototype), 'constructor', this).apply(this, arguments);
+  }
+
+  _createClass(ProfileListItem, [{
+    key: 'render',
+    value: function render() {
+      return _react2['default'].createElement(
+        'li',
+        { className: 'profile-list-item' },
+        _react2['default'].createElement(ProfileAvatar, null),
+        _react2['default'].createElement(
+          'div',
+          { className: 'profile-name' },
+          this.props.firstName,
+          ' ',
+          this.props.lastName
+        ),
+        _react2['default'].createElement(
+          'div',
+          { className: 'profile-gender' },
+          this.props.gender
+        ),
+        _react2['default'].createElement(
+          'div',
+          { className: 'profile-dob' },
+          this.props.dateOfBirth
+        )
+      );
+    }
+  }]);
+
+  return ProfileListItem;
+})(_react.Component);
+
+var ProfileAvatar = (function (_Component3) {
+  _inherits(ProfileAvatar, _Component3);
+
+  function ProfileAvatar() {
+    _classCallCheck(this, ProfileAvatar);
+
+    _get(Object.getPrototypeOf(ProfileAvatar.prototype), 'constructor', this).apply(this, arguments);
+  }
+
+  _createClass(ProfileAvatar, [{
+    key: 'render',
+    value: function render() {
+      return _react2['default'].createElement('img', { src: 'http://placehold.it/90x90' });
+    }
+  }]);
+
+  return ProfileAvatar;
+})(_react.Component);
+
+var MomentList = (function (_Component4) {
+  _inherits(MomentList, _Component4);
+
+  function MomentList() {
+    _classCallCheck(this, MomentList);
+
+    _get(Object.getPrototypeOf(MomentList.prototype), 'constructor', this).apply(this, arguments);
+  }
+
+  _createClass(MomentList, [{
+    key: 'render',
+    value: function render() {
+      return _react2['default'].createElement(
+        'ul',
+        { className: 'moment-list' },
+        this.props.moments.map(function (moment) {
+          return _react2['default'].createElement(MomentListItem, {
+            key: moment.id,
+            id: moment.id,
+            name: moment.name,
+            description: moment.description,
+            photos: moment.photos
+          });
+        })
+      );
+    }
+  }]);
+
+  return MomentList;
+})(_react.Component);
+
+var MomentListItem = (function (_Component5) {
+  _inherits(MomentListItem, _Component5);
+
+  function MomentListItem() {
+    _classCallCheck(this, MomentListItem);
+
+    _get(Object.getPrototypeOf(MomentListItem.prototype), 'constructor', this).apply(this, arguments);
+  }
+
+  _createClass(MomentListItem, [{
+    key: 'render',
+    value: function render() {
+      return _react2['default'].createElement(
+        'li',
+        { className: 'moment-list-item' },
+        _react2['default'].createElement(MomentPhotosThumnail, null),
+        _react2['default'].createElement(
+          'div',
+          { className: 'moment-name' },
+          _react2['default'].createElement(
+            _reactRouter.Link,
+            { to: '/moments/' + this.props.id },
+            this.props.name
+          )
+        )
+      );
+    }
+  }]);
+
+  return MomentListItem;
+})(_react.Component);
+
+var MomentPhotosThumnail = (function (_Component6) {
+  _inherits(MomentPhotosThumnail, _Component6);
+
+  function MomentPhotosThumnail() {
+    _classCallCheck(this, MomentPhotosThumnail);
+
+    _get(Object.getPrototypeOf(MomentPhotosThumnail.prototype), 'constructor', this).apply(this, arguments);
+  }
+
+  _createClass(MomentPhotosThumnail, [{
+    key: 'render',
+    value: function render() {
+      return _react2['default'].createElement(
+        'div',
+        { className: 'moment-photo-thunmnail' },
+        _react2['default'].createElement('img', { src: 'http://placehold.it/50x50' }),
+        _react2['default'].createElement('img', { src: 'http://placehold.it/50x50' })
+      );
+    }
+  }]);
+
+  return MomentPhotosThumnail;
+})(_react.Component);
+
+var Profile = (function (_Component7) {
+  _inherits(Profile, _Component7);
 
   function Profile() {
     _classCallCheck(this, Profile);
@@ -27288,50 +27467,26 @@ var Profile = (function (_Component) {
     _get(Object.getPrototypeOf(Profile.prototype), 'constructor', this).apply(this, arguments);
   }
 
+  // @todo Modified react-refetch/lib/components/connect.js to add xsrf token in.
+  // @todo Need to rewrite it in custom components.
+
   _createClass(Profile, [{
     key: 'render',
     value: function render() {
       return _react2['default'].createElement(_PromiseStateContainer2['default'], {
-        ps: _reactRefetch.PromiseState.all([this.props.profilesFetch, this.props.momentsFetch]),
+        ps: _reactRefetch.PromiseState.all([this.props.profilesFetch, this.props.profileFetch, this.props.momentsFetch]),
         onFulfillment: function (_ref) {
-          var _ref2 = _slicedToArray(_ref, 2);
+          var _ref2 = _slicedToArray(_ref, 3);
 
-          var profile = _ref2[0];
-          var moments = _ref2[1];
+          var profiles = _ref2[0];
+          var profile = _ref2[1];
+          var moments = _ref2[2];
 
           return _react2['default'].createElement(
             'div',
             { className: 'profile__info' },
-            _react2['default'].createElement(
-              'p',
-              null,
-              profile.first_name
-            ),
-            _react2['default'].createElement(
-              'p',
-              null,
-              profile.last_name
-            ),
-            _react2['default'].createElement(
-              'p',
-              null,
-              profile.date_of_birth
-            ),
-            _react2['default'].createElement(
-              'ul',
-              { className: 'list-group' },
-              moments.map(function (moment) {
-                return _react2['default'].createElement(
-                  'li',
-                  { key: moment.id, className: 'list-item' },
-                  _react2['default'].createElement(
-                    _reactRouter.Link,
-                    { to: '/moments/' + moment.id },
-                    moment.name
-                  )
-                );
-              })
-            )
+            _react2['default'].createElement(ProfileList, { profiles: profiles, activeProfileId: profile.id }),
+            _react2['default'].createElement(MomentList, { moments: moments })
           );
         }
       });
@@ -27341,12 +27496,12 @@ var Profile = (function (_Component) {
   return Profile;
 })(_react.Component);
 
-var refetch = _reactRefetch.connect;
-// @todo Modified react-refetch/lib/components/connect.js to add xsrf token in.
-// @todo Need to rewrite it in custom components.
 exports['default'] = (0, _reactRefetch.connect)(function (props, context) {
   return {
     profilesFetch: {
+      url: '/api/profiles'
+    },
+    profileFetch: {
       url: '/api/profiles/' + props.params.profileId
     },
     momentsFetch: '/api/profiles/' + props.params.profileId + '/moments'
