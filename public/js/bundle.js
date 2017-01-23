@@ -27295,7 +27295,7 @@ var ProfileList = (function (_Component) {
 
       return _react2['default'].createElement(
         'ul',
-        { className: 'profile-list' },
+        { className: 'list-group' },
         this.props.profiles.map(function (profile) {
           return _react2['default'].createElement(ProfileListItem, {
             key: profile.id,
@@ -27327,15 +27327,15 @@ var ProfileListItem = (function (_Component2) {
   _createClass(ProfileListItem, [{
     key: 'render',
     value: function render() {
-      // @todo remove that and do it properly
-      var inlineStyle = this.props.activeId === this.props.profileId ? { border: '1px solid red' } : {};
+      var classes = "list-group-item";
+      classes += this.props.activeId === this.props.profileId ? ' active' : '';
 
       return _react2['default'].createElement(
         'li',
-        { className: 'profile-list-item' },
+        { className: classes },
         _react2['default'].createElement(
-          'div',
-          { className: 'profile-list-item-wrapper', style: inlineStyle },
+          _reactRouter.Link,
+          { to: '/profiles/' + this.props.profileId },
           _react2['default'].createElement(ProfileAvatar, null),
           _react2['default'].createElement(
             'div',
@@ -27395,7 +27395,7 @@ var MomentList = (function (_Component4) {
     value: function render() {
       return _react2['default'].createElement(
         'ul',
-        { className: 'moment-list' },
+        { className: 'list-group' },
         this.props.moments.map(function (moment) {
           return _react2['default'].createElement(MomentListItem, {
             key: moment.id,
@@ -27412,8 +27412,31 @@ var MomentList = (function (_Component4) {
   return MomentList;
 })(_react.Component);
 
-var MomentListItem = (function (_Component5) {
-  _inherits(MomentListItem, _Component5);
+var CreateMomentButton = (function (_Component5) {
+  _inherits(CreateMomentButton, _Component5);
+
+  function CreateMomentButton() {
+    _classCallCheck(this, CreateMomentButton);
+
+    _get(Object.getPrototypeOf(CreateMomentButton.prototype), 'constructor', this).apply(this, arguments);
+  }
+
+  _createClass(CreateMomentButton, [{
+    key: 'render',
+    value: function render() {
+      return _react2['default'].createElement(
+        'button',
+        { className: 'btn btn-default', type: 'submit' },
+        'Create A Moment Now!'
+      );
+    }
+  }]);
+
+  return CreateMomentButton;
+})(_react.Component);
+
+var MomentListItem = (function (_Component6) {
+  _inherits(MomentListItem, _Component6);
 
   function MomentListItem() {
     _classCallCheck(this, MomentListItem);
@@ -27426,15 +27449,27 @@ var MomentListItem = (function (_Component5) {
     value: function render() {
       return _react2['default'].createElement(
         'li',
-        { className: 'moment-list-item' },
-        _react2['default'].createElement(MomentPhotosThumnail, null),
+        { className: 'list-group-item' },
         _react2['default'].createElement(
           'div',
-          { className: 'moment-name' },
+          { className: 'row' },
           _react2['default'].createElement(
-            _reactRouter.Link,
-            { to: '/moments/' + this.props.id },
-            this.props.name
+            'div',
+            { className: 'col-xs-8' },
+            _react2['default'].createElement(
+              'div',
+              { className: 'moment-name' },
+              _react2['default'].createElement(
+                _reactRouter.Link,
+                { to: '/moments/' + this.props.id },
+                this.props.name
+              )
+            )
+          ),
+          _react2['default'].createElement(
+            'div',
+            { className: 'col-xs-4' },
+            _react2['default'].createElement(MomentPhotosThumnail, null)
           )
         )
       );
@@ -27444,8 +27479,8 @@ var MomentListItem = (function (_Component5) {
   return MomentListItem;
 })(_react.Component);
 
-var MomentPhotosThumnail = (function (_Component6) {
-  _inherits(MomentPhotosThumnail, _Component6);
+var MomentPhotosThumnail = (function (_Component7) {
+  _inherits(MomentPhotosThumnail, _Component7);
 
   function MomentPhotosThumnail() {
     _classCallCheck(this, MomentPhotosThumnail);
@@ -27468,8 +27503,8 @@ var MomentPhotosThumnail = (function (_Component6) {
   return MomentPhotosThumnail;
 })(_react.Component);
 
-var Profile = (function (_Component7) {
-  _inherits(Profile, _Component7);
+var Profile = (function (_Component8) {
+  _inherits(Profile, _Component8);
 
   function Profile() {
     _classCallCheck(this, Profile);
@@ -27503,6 +27538,7 @@ var Profile = (function (_Component7) {
             _react2['default'].createElement(
               'div',
               { className: 'col-xs-10' },
+              _react2['default'].createElement(CreateMomentButton, null),
               _react2['default'].createElement(MomentList, { moments: moments })
             )
           );

@@ -6,7 +6,7 @@ import PromiseStateContainer from './PromiseStateContainer'
 class ProfileList extends Component {
   render() {
     return (
-      <ul className="profile-list"> 
+      <ul className="list-group"> 
         {
 	  this.props.profiles.map(profile =>  
 	    <ProfileListItem 
@@ -26,23 +26,23 @@ class ProfileList extends Component {
 }
 class ProfileListItem extends Component {
   render() {
-    // @todo remove that and do it properly
-    var inlineStyle = this.props.activeId === this.props.profileId ? {border: '1px solid red'} : {};
+    let classes = "list-group-item";
+    classes += this.props.activeId === this.props.profileId ? ' active' : '';
 
     return (
-      <li className="profile-list-item">
-        <div className="profile-list-item-wrapper" style={inlineStyle}>
-          <ProfileAvatar/> 
-          <div className="profile-name">
-            {this.props.firstName} {this.props.lastName}
-          </div>
-          <div className="profile-gender">
-            {this.props.gender}
-          </div>
-          <div className="profile-dob">
-            {this.props.dateOfBirth}
-          </div>
-	</div>
+      <li className={classes}>
+	<Link to={`/profiles/${this.props.profileId}`}>
+        <ProfileAvatar/> 
+        <div className="profile-name">
+          {this.props.firstName} {this.props.lastName}
+        </div>
+        <div className="profile-gender">
+          {this.props.gender}
+        </div>
+        <div className="profile-dob">
+          {this.props.dateOfBirth}
+        </div>
+	</Link>
       </li>
     );
   }
@@ -57,7 +57,7 @@ class ProfileAvatar extends Component {
 class MomentList extends Component {
   render() {
     return (
-      <ul className="moment-list"> 
+      <ul className="list-group"> 
         {
 	  this.props.moments.map(function(moment) { 
 	    return ( <MomentListItem 
@@ -72,13 +72,28 @@ class MomentList extends Component {
       </ul>);
   }
 }
+class CreateMomentButton extends Component {
+  render() {
+    return (
+      <button className="btn btn-default" type="submit">
+        Create A Moment Now!
+      </button>
+    )
+  }
+}
 class MomentListItem extends Component {
   render() {
     return (
-      <li className="moment-list-item">
-        <MomentPhotosThumnail/> 
-	<div className="moment-name">
-	  <Link to={`/moments/${this.props.id}`}>{this.props.name}</Link>
+      <li className="list-group-item">
+        <div className="row">
+	  <div className="col-xs-8">
+	    <div className="moment-name">
+	      <Link to={`/moments/${this.props.id}`}>{this.props.name}</Link>
+	    </div>
+	  </div>
+	  <div className="col-xs-4">
+            <MomentPhotosThumnail/> 
+	  </div>
 	</div>
       </li>
     );
@@ -106,6 +121,7 @@ class Profile extends Component {
 	        <ProfileList profiles={profiles} activeProfileId={profile.id}/>
 	      </div>
               <div className="col-xs-10">
+	        <CreateMomentButton />
 	        <MomentList moments={moments} />
 	      </div>
 	    </div>
