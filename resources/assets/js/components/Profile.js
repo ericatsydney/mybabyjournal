@@ -8,8 +8,8 @@ class ProfileList extends Component {
     return (
       <ul className="profile-list"> 
         {
-	  this.props.profiles.map(function(profile) { 
-	    return ( <ProfileListItem 
+	  this.props.profiles.map(profile =>  
+	    <ProfileListItem 
 	      key={profile.id} 
 	      firstName={profile.first_name} 
 	      lastName={profile.last_name} 
@@ -17,25 +17,31 @@ class ProfileList extends Component {
 	      profileId={profile.id} 
 	      avatar={profile.avatar} 
 	      dateOfBirth={profile.date_of_birth} 
-	      ></ProfileListItem>); 
-	  })
+	      activeId={this.props.activeProfileId}
+	      ></ProfileListItem> 
+	  )
 	}
       </ul>);
   }
 }
 class ProfileListItem extends Component {
   render() {
+    // @todo remove that and do it properly
+    var inlineStyle = this.props.activeId === this.props.profileId ? {border: '1px solid red'} : {};
+
     return (
       <li className="profile-list-item">
-        <ProfileAvatar/> 
-	<div className="profile-name">
-	  {this.props.firstName} {this.props.lastName}
-	</div>
-	<div className="profile-gender">
-	  {this.props.gender}
-	</div>
-	<div className="profile-dob">
-	  {this.props.dateOfBirth}
+        <div className="profile-list-item-wrapper" style={inlineStyle}>
+          <ProfileAvatar/> 
+          <div className="profile-name">
+            {this.props.firstName} {this.props.lastName}
+          </div>
+          <div className="profile-gender">
+            {this.props.gender}
+          </div>
+          <div className="profile-dob">
+            {this.props.dateOfBirth}
+          </div>
 	</div>
       </li>
     );

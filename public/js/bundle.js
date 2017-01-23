@@ -27291,6 +27291,8 @@ var ProfileList = (function (_Component) {
   _createClass(ProfileList, [{
     key: 'render',
     value: function render() {
+      var _this = this;
+
       return _react2['default'].createElement(
         'ul',
         { className: 'profile-list' },
@@ -27302,7 +27304,8 @@ var ProfileList = (function (_Component) {
             gender: profile.gender,
             profileId: profile.id,
             avatar: profile.avatar,
-            dateOfBirth: profile.date_of_birth
+            dateOfBirth: profile.date_of_birth,
+            activeId: _this.props.activeProfileId
           });
         })
       );
@@ -27324,26 +27327,33 @@ var ProfileListItem = (function (_Component2) {
   _createClass(ProfileListItem, [{
     key: 'render',
     value: function render() {
+      // @todo remove that and do it properly
+      var inlineStyle = this.props.activeId === this.props.profileId ? { border: '1px solid red' } : {};
+
       return _react2['default'].createElement(
         'li',
         { className: 'profile-list-item' },
-        _react2['default'].createElement(ProfileAvatar, null),
         _react2['default'].createElement(
           'div',
-          { className: 'profile-name' },
-          this.props.firstName,
-          ' ',
-          this.props.lastName
-        ),
-        _react2['default'].createElement(
-          'div',
-          { className: 'profile-gender' },
-          this.props.gender
-        ),
-        _react2['default'].createElement(
-          'div',
-          { className: 'profile-dob' },
-          this.props.dateOfBirth
+          { className: 'profile-list-item-wrapper', style: inlineStyle },
+          _react2['default'].createElement(ProfileAvatar, null),
+          _react2['default'].createElement(
+            'div',
+            { className: 'profile-name' },
+            this.props.firstName,
+            ' ',
+            this.props.lastName
+          ),
+          _react2['default'].createElement(
+            'div',
+            { className: 'profile-gender' },
+            this.props.gender
+          ),
+          _react2['default'].createElement(
+            'div',
+            { className: 'profile-dob' },
+            this.props.dateOfBirth
+          )
         )
       );
     }
