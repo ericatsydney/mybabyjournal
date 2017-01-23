@@ -50,7 +50,7 @@ class ProfileListItem extends Component {
 class ProfileAvatar extends Component {
   render() {
     return (
-      <img src="http://placehold.it/90x90" />
+      <img src="http://placehold.it/90x90" className="img-circle" />
     );
   }
 }
@@ -75,9 +75,14 @@ class MomentList extends Component {
 class CreateMomentButton extends Component {
   render() {
     return (
-      <button className="btn btn-default" type="submit">
-        Create A Moment Now!
-      </button>
+      <div className="btn-group">
+        <button className="btn btn-primary" type="submit">
+          Albumn Mode          
+        </button>
+        <button className="btn btn-success" type="submit">
+          Create A Moment Now!
+        </button>
+      </div>
     )
   }
 }

@@ -27374,7 +27374,7 @@ var ProfileAvatar = (function (_Component3) {
   _createClass(ProfileAvatar, [{
     key: 'render',
     value: function render() {
-      return _react2['default'].createElement('img', { src: 'http://placehold.it/90x90' });
+      return _react2['default'].createElement('img', { src: 'http://placehold.it/90x90', className: 'img-circle' });
     }
   }]);
 
@@ -27425,9 +27425,18 @@ var CreateMomentButton = (function (_Component5) {
     key: 'render',
     value: function render() {
       return _react2['default'].createElement(
-        'button',
-        { className: 'btn btn-default', type: 'submit' },
-        'Create A Moment Now!'
+        'div',
+        { className: 'btn-group' },
+        _react2['default'].createElement(
+          'button',
+          { className: 'btn btn-primary', type: 'submit' },
+          'Albumn Mode'
+        ),
+        _react2['default'].createElement(
+          'button',
+          { className: 'btn btn-success', type: 'submit' },
+          'Create A Moment Now!'
+        )
       );
     }
   }]);
