@@ -13,6 +13,7 @@ render((
     <Route path="/" component={App}>
       <Route path="/profiles" component={Profiles} />
       <Route path="/profiles/:profileId" component={Profile} />
+      <Route path="/profiles/:profileId/edit" component={ProfileEdit} />
       <Route path="/moments" component={Moments} />
       <Route path="/moments/:momentId" component={Moment} />
       <Route path="*" component={NoMatch} />

@@ -27294,7 +27294,7 @@ var ProfileList = (function (_Component) {
       var _this = this;
 
       return _react2['default'].createElement(
-        'ul',
+        'div',
         { className: 'list-group' },
         this.props.profiles.map(function (profile) {
           return _react2['default'].createElement(ProfileListItem, {
@@ -27331,28 +27331,22 @@ var ProfileListItem = (function (_Component2) {
       classes += this.props.activeId === this.props.profileId ? ' active' : '';
 
       return _react2['default'].createElement(
-        'li',
-        { className: classes },
+        _reactRouter.Link,
+        { to: '/profiles/' + this.props.profileId, className: classes },
         _react2['default'].createElement(
-          _reactRouter.Link,
-          { to: '/profiles/' + this.props.profileId },
-          _react2['default'].createElement(ProfileAvatar, null),
+          'div',
+          { className: 'row' },
           _react2['default'].createElement(
             'div',
-            { className: 'profile-name' },
+            { className: 'col-xs-5' },
+            _react2['default'].createElement(ProfileAvatar, null)
+          ),
+          _react2['default'].createElement(
+            'div',
+            { className: 'col-xs-7' },
             this.props.firstName,
             ' ',
             this.props.lastName
-          ),
-          _react2['default'].createElement(
-            'div',
-            { className: 'profile-gender' },
-            this.props.gender
-          ),
-          _react2['default'].createElement(
-            'div',
-            { className: 'profile-dob' },
-            this.props.dateOfBirth
           )
         )
       );
@@ -27374,7 +27368,7 @@ var ProfileAvatar = (function (_Component3) {
   _createClass(ProfileAvatar, [{
     key: 'render',
     value: function render() {
-      return _react2['default'].createElement('img', { src: 'http://placehold.it/90x90', className: 'img-circle' });
+      return _react2['default'].createElement('img', { src: 'http://placehold.it/50x50', className: 'img-circle' });
     }
   }]);
 
@@ -27425,16 +27419,21 @@ var CreateMomentButton = (function (_Component5) {
     key: 'render',
     value: function render() {
       return _react2['default'].createElement(
-        'div',
-        { className: 'btn-group' },
+        'p',
+        { className: 'btn-wrapper' },
         _react2['default'].createElement(
-          'button',
-          { className: 'btn btn-primary', type: 'submit' },
+          'a',
+          { className: 'btn btn-default', role: 'button' },
+          'Edit Profile'
+        ),
+        _react2['default'].createElement(
+          'a',
+          { className: 'btn btn-default', role: 'button' },
           'Albumn Mode'
         ),
         _react2['default'].createElement(
-          'button',
-          { className: 'btn btn-success', type: 'submit' },
+          'a',
+          { className: 'btn btn-success', role: 'button' },
           'Create A Moment Now!'
         )
       );
@@ -27503,8 +27502,8 @@ var MomentPhotosThumnail = (function (_Component7) {
       return _react2['default'].createElement(
         'div',
         { className: 'moment-photo-thunmnail' },
-        _react2['default'].createElement('img', { src: 'http://placehold.it/50x50' }),
-        _react2['default'].createElement('img', { src: 'http://placehold.it/50x50' })
+        _react2['default'].createElement('img', { src: 'http://placehold.it/50x50', className: 'img-thumbnail' }),
+        _react2['default'].createElement('img', { src: 'http://placehold.it/50x50', className: 'img-thumbnail' })
       );
     }
   }]);
