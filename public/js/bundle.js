@@ -23,6 +23,10 @@ var _componentsProfile = require('./components/Profile');
 
 var _componentsProfile2 = _interopRequireDefault(_componentsProfile);
 
+var _componentsProfileEdit = require('./components/ProfileEdit');
+
+var _componentsProfileEdit2 = _interopRequireDefault(_componentsProfileEdit);
+
 var _componentsMoments = require('./components/Moments');
 
 var _componentsMoments2 = _interopRequireDefault(_componentsMoments);
@@ -43,13 +47,14 @@ var _componentsNoMatch2 = _interopRequireDefault(_componentsNoMatch);
     { path: '/', component: _componentsApp2['default'] },
     _react2['default'].createElement(_reactRouter.Route, { path: '/profiles', component: _componentsProfiles2['default'] }),
     _react2['default'].createElement(_reactRouter.Route, { path: '/profiles/:profileId', component: _componentsProfile2['default'] }),
+    _react2['default'].createElement(_reactRouter.Route, { path: '/profiles/:profileId/edit', component: _componentsProfileEdit2['default'] }),
     _react2['default'].createElement(_reactRouter.Route, { path: '/moments', component: _componentsMoments2['default'] }),
     _react2['default'].createElement(_reactRouter.Route, { path: '/moments/:momentId', component: _componentsMoment2['default'] }),
     _react2['default'].createElement(_reactRouter.Route, { path: '*', component: _componentsNoMatch2['default'] })
   )
 ), document.getElementById('app'));
 
-},{"./components/App":251,"./components/Moment":254,"./components/Moments":255,"./components/NoMatch":256,"./components/Profile":257,"./components/Profiles":258,"react":247,"react-dom":49,"react-router":213}],2:[function(require,module,exports){
+},{"./components/App":251,"./components/Moment":254,"./components/Moments":255,"./components/NoMatch":256,"./components/Profile":257,"./components/ProfileEdit":258,"./components/Profiles":259,"react":247,"react-dom":49,"react-router":213}],2:[function(require,module,exports){
 var pSlice = Array.prototype.slice;
 var objectKeys = require('./lib/keys.js');
 var isArguments = require('./lib/is_arguments.js');
@@ -27121,7 +27126,7 @@ exports['default'] = (0, _reactRefetch.connect)(function (props) {
 })(Moment);
 module.exports = exports['default'];
 
-},{"./PromiseStateContainer":259,"react":247,"react-refetch":179}],255:[function(require,module,exports){
+},{"./PromiseStateContainer":260,"react":247,"react-refetch":179}],255:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -27201,7 +27206,7 @@ exports['default'] = (0, _reactRefetch.connect)(function (props) {
 })(Moments);
 module.exports = exports['default'];
 
-},{"./PromiseStateContainer":259,"react":247,"react-refetch":179,"react-router":213}],256:[function(require,module,exports){
+},{"./PromiseStateContainer":260,"react":247,"react-refetch":179,"react-router":213}],256:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -27571,7 +27576,105 @@ exports['default'] = (0, _reactRefetch.connect)(function (props, context) {
 })(Profile);
 module.exports = exports['default'];
 
-},{"./PromiseStateContainer":259,"react":247,"react-refetch":179,"react-router":213}],258:[function(require,module,exports){
+},{"./PromiseStateContainer":260,"react":247,"react-refetch":179,"react-router":213}],258:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+
+var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i['return']) _i['return'](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError('Invalid attempt to destructure non-iterable instance'); } }; })();
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; desc = parent = undefined; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRefetch = require('react-refetch');
+
+var _reactRouter = require('react-router');
+
+var _PromiseStateContainer = require('./PromiseStateContainer');
+
+var _PromiseStateContainer2 = _interopRequireDefault(_PromiseStateContainer);
+
+var ProfileEditForm = (function (_Component) {
+  _inherits(ProfileEditForm, _Component);
+
+  function ProfileEditForm() {
+    _classCallCheck(this, ProfileEditForm);
+
+    _get(Object.getPrototypeOf(ProfileEditForm.prototype), 'constructor', this).apply(this, arguments);
+  }
+
+  _createClass(ProfileEditForm, [{
+    key: 'render',
+    value: function render() {
+      return _react2['default'].createElement('div', { className: 'profile-edit-form' });
+    }
+  }]);
+
+  return ProfileEditForm;
+})(_react.Component);
+
+var ProfileEdit = (function (_Component2) {
+  _inherits(ProfileEdit, _Component2);
+
+  function ProfileEdit() {
+    _classCallCheck(this, ProfileEdit);
+
+    _get(Object.getPrototypeOf(ProfileEdit.prototype), 'constructor', this).apply(this, arguments);
+  }
+
+  // @todo Modified react-refetch/lib/components/connect.js to add xsrf token in.
+  // @todo Need to rewrite it in custom components.
+
+  _createClass(ProfileEdit, [{
+    key: 'render',
+    value: function render() {
+      return _react2['default'].createElement(_PromiseStateContainer2['default'], {
+        ps: _reactRefetch.PromiseState.all([this.props.profileFetch]),
+        onFulfillment: function (_ref) {
+          var _ref2 = _slicedToArray(_ref, 1);
+
+          var profile = _ref2[0];
+
+          return _react2['default'].createElement(
+            'div',
+            { className: 'profile__info' },
+            _react2['default'].createElement(
+              'div',
+              { className: 'col-xs-12' },
+              _react2['default'].createElement(ProfileEditForm, { profile: profile })
+            )
+          );
+        }
+      });
+    }
+  }]);
+
+  return ProfileEdit;
+})(_react.Component);
+
+exports['default'] = (0, _reactRefetch.connect)(function (props, context) {
+  return {
+    profileFetch: {
+      url: '/api/profiles/' + props.params.profileId
+    }
+  };
+})(ProfileEdit);
+module.exports = exports['default'];
+
+},{"./PromiseStateContainer":260,"react":247,"react-refetch":179,"react-router":213}],259:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -27652,7 +27755,7 @@ exports['default'] = (0, _reactRefetch.connect)(function (props) {
 })(Profiles);
 module.exports = exports['default'];
 
-},{"./PromiseStateContainer":259,"react":247,"react-refetch":179,"react-router":213}],259:[function(require,module,exports){
+},{"./PromiseStateContainer":260,"react":247,"react-refetch":179,"react-router":213}],260:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
