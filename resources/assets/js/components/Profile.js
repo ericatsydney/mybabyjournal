@@ -72,9 +72,7 @@ class CreateMomentButton extends Component {
   render() {
     return (
       <p className="btn-wrapper">
-        <a className="btn btn-default" role="button">
-          Edit Profile          
-        </a>
+	<Link className="btn btn-default" to={`/profiles/${this.props.profileId}/edit`}>Edit Profile</Link>
         <a className="btn btn-default" role="button">
           Albumn Mode          
         </a>
@@ -125,7 +123,7 @@ class Profile extends Component {
 	        <ProfileList profiles={profiles} activeProfileId={profile.id}/>
 	      </div>
               <div className="col-xs-10">
-	        <CreateMomentButton />
+	        <CreateMomentButton profileId={profile.id}/>
 	        <MomentList moments={moments} />
 	      </div>
 	    </div>

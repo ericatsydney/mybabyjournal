@@ -27427,8 +27427,8 @@ var CreateMomentButton = (function (_Component5) {
         'p',
         { className: 'btn-wrapper' },
         _react2['default'].createElement(
-          'a',
-          { className: 'btn btn-default', role: 'button' },
+          _reactRouter.Link,
+          { className: 'btn btn-default', to: '/profiles/' + this.props.profileId + '/edit' },
           'Edit Profile'
         ),
         _react2['default'].createElement(
@@ -27551,7 +27551,7 @@ var Profile = (function (_Component8) {
             _react2['default'].createElement(
               'div',
               { className: 'col-xs-10' },
-              _react2['default'].createElement(CreateMomentButton, null),
+              _react2['default'].createElement(CreateMomentButton, { profileId: profile.id }),
               _react2['default'].createElement(MomentList, { moments: moments })
             )
           );
@@ -27619,7 +27619,34 @@ var ProfileEditForm = (function (_Component) {
   _createClass(ProfileEditForm, [{
     key: 'render',
     value: function render() {
-      return _react2['default'].createElement('div', { className: 'profile-edit-form' });
+      return _react2['default'].createElement(
+        'div',
+        { className: 'profile-edit-form' },
+        _react2['default'].createElement(
+          'form',
+          null,
+          _react2['default'].createElement(
+            'div',
+            { className: 'form-group' },
+            _react2['default'].createElement(
+              'label',
+              { 'for': 'exampleInputEmail1' },
+              'Email address'
+            ),
+            _react2['default'].createElement('input', { type: 'email', className: 'form-control', id: 'exampleInputEmail1', 'aria-describedby': 'emailHelp', placeholder: 'Enter email' }),
+            _react2['default'].createElement(
+              'small',
+              { id: 'emailHelp', className: 'form-text text-muted' },
+              'We\'ll never share your email with anyone else.'
+            )
+          ),
+          _react2['default'].createElement(
+            'button',
+            { type: 'submit', className: 'btn btn-primary' },
+            'Submit'
+          )
+        )
+      );
     }
   }]);
 
