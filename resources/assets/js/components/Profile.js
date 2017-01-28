@@ -50,9 +50,23 @@ class ProfileAvatar extends Component {
     );
   }
 }
+class MomentEmptyMessage extends Component {
+  render() {
+    return (
+      <div className="card">
+        <div className="card-block">
+          <h4 className="card-title">Opps there is no moment yet</h4>
+          <p className="card-text">Create a new one.</p>
+          <a className="btn btn-primary">Create a Moment</a>
+        </div>
+      </div>
+    );
+  }
+}
 class MomentList extends Component {
   render() {
     return (
+      this.props.moments.length ? (
       <ul className="list-group"> 
         {
 	  this.props.moments.map(function(moment) { 
@@ -65,21 +79,24 @@ class MomentList extends Component {
 	      ></MomentListItem>); 
 	  })
 	}
-      </ul>);
+      </ul>) : <MomentEmptyMessage/>
+    )
   }
 }
 class CreateMomentButton extends Component {
   render() {
     return (
-      <p className="btn-wrapper">
-	<Link className="btn btn-default" to={`/profiles/${this.props.profileId}/edit`}>Edit Profile</Link>
-        <a className="btn btn-default" role="button">
-          Albumn Mode          
-        </a>
-        <a className="btn btn-success" role="button">
-          Create A Moment Now!
-        </a>
-      </p>
+      <div className="btn-wrapper">
+        <p>
+	  <Link className="btn btn-default" to={`/profiles/${this.props.profileId}/edit`}>Edit Profile</Link>
+          <a className="btn btn-default" role="button">
+            Albumn Mode          
+          </a>
+        </p>
+        <div className="fixed-action-btn">
+	  <Link className="btn-floating btn-small blue"><i className="fa fa-plus"></i></Link>
+        </div>
+      </div>
     )
   }
 }

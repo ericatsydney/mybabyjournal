@@ -7,3 +7,60 @@
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+// @todo The following is the hack for MDB
+.card-block {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.25rem;
+}
+
+.btn-floating,.btn-floating i {
+    color: #fff;
+    display: inline-block;
+    line-height: 37px
+}
+
+.btn-floating {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    width: 37px;
+    height: 37px;
+    padding: 0;
+    background-color: #a6c;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+    transition: .3s;
+    margin: 10px
+}
+
+.btn-flat,.btn-flat:focus {
+    background-color: transparent
+}
+
+.btn-floating i {
+    width: inherit;
+    text-align: center;
+    font-size: 1.6rem
+}
+
+.btn-floating {
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);
+}
+.btn-floating:hover {
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);
+}
+.fixed-action-btn {
+    position: fixed;
+    right: 23px;
+    bottom: 23px;
+    padding-top: 15px;
+    margin-bottom: 0;
+    z-index: 998;
+}

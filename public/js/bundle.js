@@ -27380,8 +27380,49 @@ var ProfileAvatar = (function (_Component3) {
   return ProfileAvatar;
 })(_react.Component);
 
-var MomentList = (function (_Component4) {
-  _inherits(MomentList, _Component4);
+var MomentEmptyMessage = (function (_Component4) {
+  _inherits(MomentEmptyMessage, _Component4);
+
+  function MomentEmptyMessage() {
+    _classCallCheck(this, MomentEmptyMessage);
+
+    _get(Object.getPrototypeOf(MomentEmptyMessage.prototype), 'constructor', this).apply(this, arguments);
+  }
+
+  _createClass(MomentEmptyMessage, [{
+    key: 'render',
+    value: function render() {
+      return _react2['default'].createElement(
+        'div',
+        { className: 'card' },
+        _react2['default'].createElement(
+          'div',
+          { className: 'card-block' },
+          _react2['default'].createElement(
+            'h4',
+            { className: 'card-title' },
+            'Opps there is no moment yet'
+          ),
+          _react2['default'].createElement(
+            'p',
+            { className: 'card-text' },
+            'Create a new one.'
+          ),
+          _react2['default'].createElement(
+            'a',
+            { className: 'btn btn-primary' },
+            'Create a Moment'
+          )
+        )
+      );
+    }
+  }]);
+
+  return MomentEmptyMessage;
+})(_react.Component);
+
+var MomentList = (function (_Component5) {
+  _inherits(MomentList, _Component5);
 
   function MomentList() {
     _classCallCheck(this, MomentList);
@@ -27392,7 +27433,7 @@ var MomentList = (function (_Component4) {
   _createClass(MomentList, [{
     key: 'render',
     value: function render() {
-      return _react2['default'].createElement(
+      return this.props.moments.length ? _react2['default'].createElement(
         'ul',
         { className: 'list-group' },
         this.props.moments.map(function (moment) {
@@ -27404,15 +27445,15 @@ var MomentList = (function (_Component4) {
             photos: moment.photos
           });
         })
-      );
+      ) : _react2['default'].createElement(MomentEmptyMessage, null);
     }
   }]);
 
   return MomentList;
 })(_react.Component);
 
-var CreateMomentButton = (function (_Component5) {
-  _inherits(CreateMomentButton, _Component5);
+var CreateMomentButton = (function (_Component6) {
+  _inherits(CreateMomentButton, _Component6);
 
   function CreateMomentButton() {
     _classCallCheck(this, CreateMomentButton);
@@ -27424,22 +27465,30 @@ var CreateMomentButton = (function (_Component5) {
     key: 'render',
     value: function render() {
       return _react2['default'].createElement(
-        'p',
+        'div',
         { className: 'btn-wrapper' },
         _react2['default'].createElement(
-          _reactRouter.Link,
-          { className: 'btn btn-default', to: '/profiles/' + this.props.profileId + '/edit' },
-          'Edit Profile'
+          'p',
+          null,
+          _react2['default'].createElement(
+            _reactRouter.Link,
+            { className: 'btn btn-default', to: '/profiles/' + this.props.profileId + '/edit' },
+            'Edit Profile'
+          ),
+          _react2['default'].createElement(
+            'a',
+            { className: 'btn btn-default', role: 'button' },
+            'Albumn Mode'
+          )
         ),
         _react2['default'].createElement(
-          'a',
-          { className: 'btn btn-default', role: 'button' },
-          'Albumn Mode'
-        ),
-        _react2['default'].createElement(
-          'a',
-          { className: 'btn btn-success', role: 'button' },
-          'Create A Moment Now!'
+          'div',
+          { className: 'fixed-action-btn' },
+          _react2['default'].createElement(
+            _reactRouter.Link,
+            { className: 'btn-floating btn-small blue' },
+            _react2['default'].createElement('i', { className: 'fa fa-plus' })
+          )
         )
       );
     }
@@ -27448,8 +27497,8 @@ var CreateMomentButton = (function (_Component5) {
   return CreateMomentButton;
 })(_react.Component);
 
-var MomentListItem = (function (_Component6) {
-  _inherits(MomentListItem, _Component6);
+var MomentListItem = (function (_Component7) {
+  _inherits(MomentListItem, _Component7);
 
   function MomentListItem() {
     _classCallCheck(this, MomentListItem);
@@ -27492,8 +27541,8 @@ var MomentListItem = (function (_Component6) {
   return MomentListItem;
 })(_react.Component);
 
-var MomentPhotosThumnail = (function (_Component7) {
-  _inherits(MomentPhotosThumnail, _Component7);
+var MomentPhotosThumnail = (function (_Component8) {
+  _inherits(MomentPhotosThumnail, _Component8);
 
   function MomentPhotosThumnail() {
     _classCallCheck(this, MomentPhotosThumnail);
@@ -27516,8 +27565,8 @@ var MomentPhotosThumnail = (function (_Component7) {
   return MomentPhotosThumnail;
 })(_react.Component);
 
-var Profile = (function (_Component8) {
-  _inherits(Profile, _Component8);
+var Profile = (function (_Component9) {
+  _inherits(Profile, _Component9);
 
   function Profile() {
     _classCallCheck(this, Profile);
