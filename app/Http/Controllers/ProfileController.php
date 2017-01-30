@@ -83,9 +83,17 @@ class ProfileController extends Controller
   public function update(Request $request, $id)
   {
       $profile = Profile::findOrFail($id);
+      $file = $request->file('avatar');
+      //@todo this will be uncomment after testing.
+      //$file_path = $file->storeAs('avatars/' . auth()->id(),  'avatar.png');
+      $file_path = $file->storeAs('avatars/' . $id,  'avatar.png');
+      $result = $request->all();
+      //@todo this will be uncomment after testing.
+      //$result['avatar'] = 'avatars/' . auth()->id() . '/avatar.png';
+      $result['avatar'] = '/avatars/' . $id . '/avatar.png';
 
-      if ($profile->update($request->all())) {
-	return 'Succeed';
+      if ($profile->update($result)) {
+	return redirect('profiles/'. $id . '/edit');
       }
       else {
 	return 'Fail';

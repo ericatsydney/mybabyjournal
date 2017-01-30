@@ -27670,12 +27670,14 @@ var ProfileEditForm = (function (_Component) {
     value: function render() {
       var _this = this;
 
+      var updateUri = '/api/profiles/' + this.props.profile.id;
       return _react2['default'].createElement(
         'div',
         { className: 'profile-edit-form' },
         _react2['default'].createElement(
           'form',
-          null,
+          { action: updateUri, method: 'POST', encType: 'multipart/form-data' },
+          _react2['default'].createElement('input', { type: 'hidden', name: '_method', value: 'PUT' }),
           _react2['default'].createElement(
             'div',
             { className: 'form-group' },
@@ -27684,7 +27686,7 @@ var ProfileEditForm = (function (_Component) {
               { 'for': 'firstName' },
               'First name'
             ),
-            _react2['default'].createElement('input', { type: 'text', className: 'form-control', id: 'firstName', placeholder: 'Enter first name', ref: function (input) {
+            _react2['default'].createElement('input', { type: 'text', className: 'form-control', id: 'firstName', name: 'first_name', placeholder: 'Enter first name', ref: function (input) {
                 return _this.input = input;
               }, defaultValue: this.props.profile.first_name })
           ),
@@ -27696,7 +27698,7 @@ var ProfileEditForm = (function (_Component) {
               { 'for': 'lastName' },
               'Last name'
             ),
-            _react2['default'].createElement('input', { type: 'text', className: 'form-control', id: 'lastName', placeholder: 'Enter last name', ref: function (input) {
+            _react2['default'].createElement('input', { type: 'text', className: 'form-control', id: 'lastName', name: 'last_name', placeholder: 'Enter last name', ref: function (input) {
                 return _this.input = input;
               }, defaultValue: this.props.profile.last_name })
           ),
@@ -27708,7 +27710,7 @@ var ProfileEditForm = (function (_Component) {
               { 'for': 'dateOfBirth' },
               'Date of birth'
             ),
-            _react2['default'].createElement('input', { type: 'text', className: 'form-control', id: 'dateOfBirth', placeholder: 'dd / MM / yyyy', ref: function (input) {
+            _react2['default'].createElement('input', { type: 'text', className: 'form-control', id: 'dateOfBirth', name: 'date_of_birth', placeholder: 'yyyy-MM-dd', ref: function (input) {
                 return _this.input = input;
               }, defaultValue: this.props.profile.date_of_birth })
           ),
@@ -27723,8 +27725,8 @@ var ProfileEditForm = (function (_Component) {
             _react2['default'].createElement(
               'div',
               { className: 'row' },
-              _react2['default'].createElement('img', { src: 'http://placehold.it/90x90', className: 'img-circle pull-left' }),
-              _react2['default'].createElement('input', { type: 'file', className: 'form-control-file', id: 'avatar' })
+              _react2['default'].createElement('img', { src: this.props.profile.avatar, className: 'img-circle pull-left' }),
+              _react2['default'].createElement('input', { type: 'file', className: 'form-control-file', id: 'avatar', name: 'avatar' })
             )
           ),
           _react2['default'].createElement(
@@ -27741,7 +27743,7 @@ var ProfileEditForm = (function (_Component) {
               _react2['default'].createElement(
                 'label',
                 { className: 'form-check-label' },
-                _react2['default'].createElement('input', { type: 'radio', className: 'form-check-input', name: 'optionsRadios', id: 'optionsRadios1', value: 'boy', ref: function (input) {
+                _react2['default'].createElement('input', { type: 'radio', className: 'form-check-input', name: 'gender', id: 'genderBoy', value: 'boy', ref: function (input) {
                     return _this.input = input;
                   }, defaultChecked: this.props.profile.gender === 'boy' }),
                 'Boy'
@@ -27753,7 +27755,7 @@ var ProfileEditForm = (function (_Component) {
               _react2['default'].createElement(
                 'label',
                 { className: 'form-check-label' },
-                _react2['default'].createElement('input', { type: 'radio', className: 'form-check-input', name: 'optionsRadios', id: 'optionsRadios2', value: 'girl', ref: function (input) {
+                _react2['default'].createElement('input', { type: 'radio', className: 'form-check-input', name: 'gender', id: 'genderGirl', value: 'girl', ref: function (input) {
                     return _this.input = input;
                   }, defaultChecked: this.props.profile.gender === 'girl' }),
                 'Girl'
