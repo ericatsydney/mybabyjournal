@@ -33,7 +33,7 @@ class ProfileListItem extends Component {
       <Link to={`/profiles/${this.props.profileId}`} className={classes}>
         <div className="row">
 	  <div className="col-xs-5">
-            <ProfileAvatar/> 
+            <ProfileAvatar avatar={this.props.avatar}/> 
 	  </div>
 	  <div className="col-xs-7">
             {this.props.firstName} {this.props.lastName}
@@ -46,7 +46,7 @@ class ProfileListItem extends Component {
 class ProfileAvatar extends Component {
   render() {
     return (
-      <img src="http://placehold.it/50x50" className="img-circle" />
+      <img src={this.props.avatar} className="img-circle" width="50" height="50" />
     );
   }
 }

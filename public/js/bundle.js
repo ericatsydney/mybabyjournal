@@ -27344,7 +27344,7 @@ var ProfileListItem = (function (_Component2) {
           _react2['default'].createElement(
             'div',
             { className: 'col-xs-5' },
-            _react2['default'].createElement(ProfileAvatar, null)
+            _react2['default'].createElement(ProfileAvatar, { avatar: this.props.avatar })
           ),
           _react2['default'].createElement(
             'div',
@@ -27373,7 +27373,7 @@ var ProfileAvatar = (function (_Component3) {
   _createClass(ProfileAvatar, [{
     key: 'render',
     value: function render() {
-      return _react2['default'].createElement('img', { src: 'http://placehold.it/50x50', className: 'img-circle' });
+      return _react2['default'].createElement('img', { src: this.props.avatar, className: 'img-circle', width: '50', height: '50' });
     }
   }]);
 
