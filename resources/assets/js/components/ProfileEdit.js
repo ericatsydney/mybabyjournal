@@ -9,10 +9,37 @@ class ProfileEditForm extends Component {
       <div className="profile-edit-form"> 
         <form>
           <div className="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
-            <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+            <label for="firstName">First name</label>
+            <input type="text" className="form-control" id="firstName" placeholder="Enter first name" ref={(input) => this.input = input} defaultValue={this.props.profile.first_name}/>
           </div>
+          <div className="form-group">
+            <label for="lastName">Last name</label>
+            <input type="text" className="form-control" id="lastName" placeholder="Enter last name" ref={(input) => this.input = input} defaultValue={this.props.profile.last_name}/>
+          </div>
+          <div className="form-group">
+            <label for="dateOfBirth">Date of birth</label>
+            <input type="text" className="form-control" id="dateOfBirth" placeholder="dd / MM / yyyy" ref={(input) => this.input = input} defaultValue={this.props.profile.date_of_birth}/>
+          </div>
+	  <div className="form-group">
+	    <label for="avatar">Avatar</label>
+            <div className="row">
+	       <img src="http://placehold.it/90x90" className="img-circle pull-left" />
+	       <input type="file" className="form-control-file" id="avatar" />
+            </div>
+	  </div>
+	  <fieldset className="form-group">
+	    <legend>Gender</legend>
+	    <div className="form-check">
+	      <label className="form-check-label">
+		<input type="radio" className="form-check-input" name="optionsRadios" id="optionsRadios1" value="boy" ref={(input) =>     this.input = input} defaultChecked={this.props.profile.gender === 'boy'}/>Boy
+	      </label>
+	    </div>
+	    <div className="form-check">
+	      <label className="form-check-label">
+		<input type="radio" className="form-check-input" name="optionsRadios" id="optionsRadios2" value="girl" ref={(input) =>     this.input = input} defaultChecked={this.props.profile.gender === 'girl'}/>Girl
+	      </label>
+	    </div>
+          </fieldset>
           <button type="submit" className="btn btn-primary">Submit</button>
         </form>
       </div>);

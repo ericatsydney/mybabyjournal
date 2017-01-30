@@ -27668,6 +27668,8 @@ var ProfileEditForm = (function (_Component) {
   _createClass(ProfileEditForm, [{
     key: 'render',
     value: function render() {
+      var _this = this;
+
       return _react2['default'].createElement(
         'div',
         { className: 'profile-edit-form' },
@@ -27679,14 +27681,83 @@ var ProfileEditForm = (function (_Component) {
             { className: 'form-group' },
             _react2['default'].createElement(
               'label',
-              { 'for': 'exampleInputEmail1' },
-              'Email address'
+              { 'for': 'firstName' },
+              'First name'
             ),
-            _react2['default'].createElement('input', { type: 'email', className: 'form-control', id: 'exampleInputEmail1', 'aria-describedby': 'emailHelp', placeholder: 'Enter email' }),
+            _react2['default'].createElement('input', { type: 'text', className: 'form-control', id: 'firstName', placeholder: 'Enter first name', ref: function (input) {
+                return _this.input = input;
+              }, defaultValue: this.props.profile.first_name })
+          ),
+          _react2['default'].createElement(
+            'div',
+            { className: 'form-group' },
             _react2['default'].createElement(
-              'small',
-              { id: 'emailHelp', className: 'form-text text-muted' },
-              'We\'ll never share your email with anyone else.'
+              'label',
+              { 'for': 'lastName' },
+              'Last name'
+            ),
+            _react2['default'].createElement('input', { type: 'text', className: 'form-control', id: 'lastName', placeholder: 'Enter last name', ref: function (input) {
+                return _this.input = input;
+              }, defaultValue: this.props.profile.last_name })
+          ),
+          _react2['default'].createElement(
+            'div',
+            { className: 'form-group' },
+            _react2['default'].createElement(
+              'label',
+              { 'for': 'dateOfBirth' },
+              'Date of birth'
+            ),
+            _react2['default'].createElement('input', { type: 'text', className: 'form-control', id: 'dateOfBirth', placeholder: 'dd / MM / yyyy', ref: function (input) {
+                return _this.input = input;
+              }, defaultValue: this.props.profile.date_of_birth })
+          ),
+          _react2['default'].createElement(
+            'div',
+            { className: 'form-group' },
+            _react2['default'].createElement(
+              'label',
+              { 'for': 'avatar' },
+              'Avatar'
+            ),
+            _react2['default'].createElement(
+              'div',
+              { className: 'row' },
+              _react2['default'].createElement('img', { src: 'http://placehold.it/90x90', className: 'img-circle pull-left' }),
+              _react2['default'].createElement('input', { type: 'file', className: 'form-control-file', id: 'avatar' })
+            )
+          ),
+          _react2['default'].createElement(
+            'fieldset',
+            { className: 'form-group' },
+            _react2['default'].createElement(
+              'legend',
+              null,
+              'Gender'
+            ),
+            _react2['default'].createElement(
+              'div',
+              { className: 'form-check' },
+              _react2['default'].createElement(
+                'label',
+                { className: 'form-check-label' },
+                _react2['default'].createElement('input', { type: 'radio', className: 'form-check-input', name: 'optionsRadios', id: 'optionsRadios1', value: 'boy', ref: function (input) {
+                    return _this.input = input;
+                  }, defaultChecked: this.props.profile.gender === 'boy' }),
+                'Boy'
+              )
+            ),
+            _react2['default'].createElement(
+              'div',
+              { className: 'form-check' },
+              _react2['default'].createElement(
+                'label',
+                { className: 'form-check-label' },
+                _react2['default'].createElement('input', { type: 'radio', className: 'form-check-input', name: 'optionsRadios', id: 'optionsRadios2', value: 'girl', ref: function (input) {
+                    return _this.input = input;
+                  }, defaultChecked: this.props.profile.gender === 'girl' }),
+                'Girl'
+              )
             )
           ),
           _react2['default'].createElement(
