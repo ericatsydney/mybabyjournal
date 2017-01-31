@@ -113,6 +113,9 @@ class MomentListItem extends Component {
 	  <div className="col-xs-4">
             <MomentPhotosThumnail/> 
 	  </div>
+	  <Link className="btn-floating red waves-effect waves-light" to={`/moments/${this.props.id}/edit`}>
+	    <i className="fa fa-pencil"></i>
+	  </Link>
 	</div>
       </li>
     );

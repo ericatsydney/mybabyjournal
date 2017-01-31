@@ -28,8 +28,7 @@ class ProfileController extends Controller
    * @param  \Illuminate\Http\Request  $request
    * @return \Illuminate\Http\Response
    */
-  public function store(Request $request)
-  {
+  public function store(Request $request) {
       $profile = new Profile;
       $profile->first_name = $request->get('first_name');
       $profile->last_name = $request->get('last_name');
@@ -52,8 +51,7 @@ class ProfileController extends Controller
       }
   }
 
-  public function destroy($id)
-  {
+  public function destroy($id) {
       $profile = Profile::findOrFail($id);
       if(!$profile) {
           throw new NotFoundHttpException;
@@ -80,8 +78,7 @@ class ProfileController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function update(Request $request, $id)
-  {
+  public function update(Request $request, $id) {
       $profile = Profile::findOrFail($id);
       $file = $request->file('avatar');
       //@todo this will be uncomment after testing.

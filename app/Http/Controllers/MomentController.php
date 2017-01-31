@@ -8,7 +8,7 @@ use App\Moment;
 class MomentController extends Controller
 { 
   public function __construct() {
-    $this->middleware('auth:api');
+//    $this->middleware('auth:api');
   }
   public function index() {
 	  // @todo add checking the user authorization.
@@ -27,8 +27,7 @@ class MomentController extends Controller
    * @param  \Illuminate\Http\Request  $request
    * @return \Illuminate\Http\Response
    */
-  public function store(Request $request)
-  {
+  public function store(Request $request) {
       $moment = new Moment;
       $moment->name = $request->get('name');
       if ($moment->save()) {
@@ -39,8 +38,7 @@ class MomentController extends Controller
       }
   }
 
-  public function destroy($id)
-  {
+  public function destroy($id) {
       $moment = Moment::findOrFail($id);
       if(!$moment) {
           throw new NotFoundHttpException;
@@ -52,4 +50,27 @@ class MomentController extends Controller
 	return 'fail';
       }
    }
+
+  /**
+   * Update the specified resource in storage.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function update(Request $request, $id) {
+      $moment = Moment::findOrFail($id);
+      $file = $request->file('avatar');
+      //@todo refactor this for security reason.
+      $file_path = $file->storeAs('avatars/' . $id,  'avatar.png');
+      $result = $request->all();
+      $result['avatar'] = '/avatars/' . $id . '/avatar.png';
+
+      if ($moment->update($result)) {
+	return redirect('profiles/'. $moment->profileId . '/edit');
+      }
+      else {
+	return 'Fail';
+      }
+  }
 }
