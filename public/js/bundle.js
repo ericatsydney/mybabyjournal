@@ -27442,8 +27442,94 @@ var _PromiseStateContainer = require('./PromiseStateContainer');
 
 var _PromiseStateContainer2 = _interopRequireDefault(_PromiseStateContainer);
 
-var ProfileList = (function (_Component) {
-  _inherits(ProfileList, _Component);
+var MomentEditModal = (function (_Component) {
+  _inherits(MomentEditModal, _Component);
+
+  function MomentEditModal() {
+    _classCallCheck(this, MomentEditModal);
+
+    _get(Object.getPrototypeOf(MomentEditModal.prototype), 'constructor', this).apply(this, arguments);
+  }
+
+  _createClass(MomentEditModal, [{
+    key: 'render',
+    value: function render() {
+      var _this = this;
+
+      var updateUri = '/api/moments';
+      return _react2['default'].createElement(
+        'div',
+        { className: 'modal fade', id: 'momentEditModal', tabIndex: '-1', role: 'dialog' },
+        _react2['default'].createElement(
+          'div',
+          { className: 'modal-dialog', role: 'document' },
+          _react2['default'].createElement(
+            'div',
+            { className: 'modal-content' },
+            _react2['default'].createElement(
+              'div',
+              { className: 'modal-body' },
+              _react2['default'].createElement(
+                'form',
+                { action: updateUri, method: 'POST', encType: 'multipart/form-data' },
+                _react2['default'].createElement('input', { type: 'hidden', name: '_method', value: 'PUT' }),
+                _react2['default'].createElement(
+                  'div',
+                  { className: 'md-form' },
+                  _react2['default'].createElement('input', { type: 'text', className: 'form-control', id: 'name', name: 'name', placeholder: 'Enter name', ref: function (input) {
+                      return _this.input = input;
+                    }, defaultValue: this.props.name }),
+                  _react2['default'].createElement(
+                    'label',
+                    { 'for': 'name' },
+                    'First name'
+                  )
+                ),
+                _react2['default'].createElement(
+                  'div',
+                  { className: 'md-form' },
+                  _react2['default'].createElement('textarea', { type: 'text', className: 'form-control md-textarea', id: 'description', name: 'description', placeholder: 'Enter description', ref: function (input) {
+                      return _this.input = input;
+                    }, defaultValue: this.props.description }),
+                  _react2['default'].createElement(
+                    'label',
+                    { 'for': 'name' },
+                    'Description'
+                  )
+                ),
+                _react2['default'].createElement(
+                  'div',
+                  { className: 'md-form' },
+                  _react2['default'].createElement(
+                    'div',
+                    { className: 'row' },
+                    _react2['default'].createElement('img', { src: this.props.avatar, className: 'img-circle pull-left' }),
+                    _react2['default'].createElement('input', { type: 'file', className: 'form-control-file', id: 'avatar', name: 'avatar' })
+                  ),
+                  _react2['default'].createElement(
+                    'label',
+                    { 'for': 'avatar' },
+                    'Avatar'
+                  )
+                ),
+                _react2['default'].createElement(
+                  'button',
+                  { type: 'submit', className: 'btn btn-primary' },
+                  'Submit'
+                )
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return MomentEditModal;
+})(_react.Component);
+
+var ProfileList = (function (_Component2) {
+  _inherits(ProfileList, _Component2);
 
   function ProfileList() {
     _classCallCheck(this, ProfileList);
@@ -27454,7 +27540,7 @@ var ProfileList = (function (_Component) {
   _createClass(ProfileList, [{
     key: 'render',
     value: function render() {
-      var _this = this;
+      var _this2 = this;
 
       return _react2['default'].createElement(
         'div',
@@ -27468,7 +27554,7 @@ var ProfileList = (function (_Component) {
             profileId: profile.id,
             avatar: profile.avatar,
             dateOfBirth: profile.date_of_birth,
-            activeId: _this.props.activeProfileId
+            activeId: _this2.props.activeProfileId
           });
         })
       );
@@ -27478,8 +27564,8 @@ var ProfileList = (function (_Component) {
   return ProfileList;
 })(_react.Component);
 
-var ProfileListItem = (function (_Component2) {
-  _inherits(ProfileListItem, _Component2);
+var ProfileListItem = (function (_Component3) {
+  _inherits(ProfileListItem, _Component3);
 
   function ProfileListItem() {
     _classCallCheck(this, ProfileListItem);
@@ -27519,8 +27605,8 @@ var ProfileListItem = (function (_Component2) {
   return ProfileListItem;
 })(_react.Component);
 
-var ProfileAvatar = (function (_Component3) {
-  _inherits(ProfileAvatar, _Component3);
+var ProfileAvatar = (function (_Component4) {
+  _inherits(ProfileAvatar, _Component4);
 
   function ProfileAvatar() {
     _classCallCheck(this, ProfileAvatar);
@@ -27538,8 +27624,8 @@ var ProfileAvatar = (function (_Component3) {
   return ProfileAvatar;
 })(_react.Component);
 
-var MomentEmptyMessage = (function (_Component4) {
-  _inherits(MomentEmptyMessage, _Component4);
+var MomentEmptyMessage = (function (_Component5) {
+  _inherits(MomentEmptyMessage, _Component5);
 
   function MomentEmptyMessage() {
     _classCallCheck(this, MomentEmptyMessage);
@@ -27579,8 +27665,8 @@ var MomentEmptyMessage = (function (_Component4) {
   return MomentEmptyMessage;
 })(_react.Component);
 
-var MomentList = (function (_Component5) {
-  _inherits(MomentList, _Component5);
+var MomentList = (function (_Component6) {
+  _inherits(MomentList, _Component6);
 
   function MomentList() {
     _classCallCheck(this, MomentList);
@@ -27610,8 +27696,8 @@ var MomentList = (function (_Component5) {
   return MomentList;
 })(_react.Component);
 
-var CreateMomentButton = (function (_Component6) {
-  _inherits(CreateMomentButton, _Component6);
+var CreateMomentButton = (function (_Component7) {
+  _inherits(CreateMomentButton, _Component7);
 
   function CreateMomentButton() {
     _classCallCheck(this, CreateMomentButton);
@@ -27626,27 +27712,19 @@ var CreateMomentButton = (function (_Component6) {
         'div',
         { className: 'btn-wrapper' },
         _react2['default'].createElement(
-          'p',
-          null,
-          _react2['default'].createElement(
-            _reactRouter.Link,
-            { className: 'btn btn-default', to: '/profiles/' + this.props.profileId + '/edit' },
-            'Edit Profile'
-          ),
-          _react2['default'].createElement(
-            'a',
-            { className: 'btn btn-default', role: 'button' },
-            'Albumn Mode'
-          )
+          _reactRouter.Link,
+          { className: 'btn btn-default', to: '/profiles/' + this.props.profileId + '/edit' },
+          'Edit Profile'
         ),
         _react2['default'].createElement(
-          'div',
-          { className: 'fixed-action-btn' },
-          _react2['default'].createElement(
-            _reactRouter.Link,
-            { className: 'btn-floating btn-small blue' },
-            _react2['default'].createElement('i', { className: 'fa fa-plus' })
-          )
+          'a',
+          { className: 'btn btn-default', role: 'button' },
+          'Albumn Mode'
+        ),
+        _react2['default'].createElement(
+          'button',
+          { type: 'button', className: 'btn btn-warning', 'data-toggle': 'modal', 'data-target': '#momentEditModal' },
+          'Add New Moment'
         )
       );
     }
@@ -27655,8 +27733,8 @@ var CreateMomentButton = (function (_Component6) {
   return CreateMomentButton;
 })(_react.Component);
 
-var MomentListItem = (function (_Component7) {
-  _inherits(MomentListItem, _Component7);
+var MomentListItem = (function (_Component8) {
+  _inherits(MomentListItem, _Component8);
 
   function MomentListItem() {
     _classCallCheck(this, MomentListItem);
@@ -27704,8 +27782,8 @@ var MomentListItem = (function (_Component7) {
   return MomentListItem;
 })(_react.Component);
 
-var MomentPhotosThumnail = (function (_Component8) {
-  _inherits(MomentPhotosThumnail, _Component8);
+var MomentPhotosThumnail = (function (_Component9) {
+  _inherits(MomentPhotosThumnail, _Component9);
 
   function MomentPhotosThumnail() {
     _classCallCheck(this, MomentPhotosThumnail);
@@ -27728,8 +27806,8 @@ var MomentPhotosThumnail = (function (_Component8) {
   return MomentPhotosThumnail;
 })(_react.Component);
 
-var Profile = (function (_Component9) {
-  _inherits(Profile, _Component9);
+var Profile = (function (_Component10) {
+  _inherits(Profile, _Component10);
 
   function Profile() {
     _classCallCheck(this, Profile);
@@ -27763,6 +27841,7 @@ var Profile = (function (_Component9) {
             _react2['default'].createElement(
               'div',
               { className: 'col-xs-10' },
+              _react2['default'].createElement(MomentEditModal, null),
               _react2['default'].createElement(CreateMomentButton, { profileId: profile.id }),
               _react2['default'].createElement(MomentList, { moments: moments })
             )

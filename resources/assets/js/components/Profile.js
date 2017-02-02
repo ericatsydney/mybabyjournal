@@ -3,6 +3,41 @@ import { connect, PromiseState } from 'react-refetch'
 import { Link } from 'react-router'
 import PromiseStateContainer from './PromiseStateContainer'
 
+class MomentEditModal extends Component {
+  render() {
+    let updateUri = `/api/moments`;
+    return (
+      <div className="modal fade" id="momentEditModal" tabIndex="-1" role="dialog">
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+          <div className="modal-body">
+            <form action={updateUri} method="POST" encType="multipart/form-data">
+              <input type="hidden" name="_method" value="PUT" />
+              <div className="md-form">
+                <input type="text" className="form-control" id="name" name="name" placeholder="Enter name" ref={(input) => this.input = input} defaultValue={this.props.name}/>
+                <label for="name">First name</label>
+              </div>
+              <div className="md-form">
+                <textarea type="text" className="form-control md-textarea" id="description" name="description" placeholder="Enter description" ref={(input) => this.input = input} defaultValue={this.props.description}/>
+                <label for="name">Description</label>
+              </div>
+	      <div className="md-form">
+                <div className="row">
+	           <img src={this.props.avatar} className="img-circle pull-left" />
+	           <input type="file" className="form-control-file" id="avatar" name="avatar" />
+                </div>
+	        <label for="avatar">Avatar</label>
+	      </div>
+              <button type="submit" className="btn btn-primary">Submit</button>
+            </form>
+	  </div>
+	  </div>
+	</div>
+      </div>
+    );
+  }
+}
+
 class ProfileList extends Component {
   render() {
     return (
@@ -87,15 +122,11 @@ class CreateMomentButton extends Component {
   render() {
     return (
       <div className="btn-wrapper">
-        <p>
 	  <Link className="btn btn-default" to={`/profiles/${this.props.profileId}/edit`}>Edit Profile</Link>
           <a className="btn btn-default" role="button">
             Albumn Mode          
           </a>
-        </p>
-        <div className="fixed-action-btn">
-	  <Link className="btn-floating btn-small blue"><i className="fa fa-plus"></i></Link>
-        </div>
+	  <button type="button" className="btn btn-warning" data-toggle="modal" data-target="#momentEditModal">Add New Moment</button>
       </div>
     )
   }
@@ -143,6 +174,7 @@ class Profile extends Component {
 	        <ProfileList profiles={profiles} activeProfileId={profile.id}/>
 	      </div>
               <div className="col-xs-10">
+	        <MomentEditModal />
 	        <CreateMomentButton profileId={profile.id}/>
 	        <MomentList moments={moments} />
 	      </div>
