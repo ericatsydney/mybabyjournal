@@ -5,20 +5,19 @@ import PromiseStateContainer from './PromiseStateContainer'
 
 class MomentEditModal extends Component {
   render() {
-    let updateUri = `/api/moments`;
     return (
       <div className="modal fade" id="momentEditModal" tabIndex="-1" role="dialog">
         <div className="modal-dialog" role="document">
           <div className="modal-content">
           <div className="modal-body">
-            <form action={updateUri} method="POST" encType="multipart/form-data">
+            <form action={this.props.momentEditUrl} method="POST" encType="multipart/form-data">
               <input type="hidden" name="_method" value="PUT" />
               <div className="md-form">
-                <input type="text" className="form-control" id="name" name="name" placeholder="Enter name" ref={(input) => this.input = input} defaultValue={this.props.name}/>
+                <input type="text" className="form-control" id="name" name="name" placeholder="Enter name" value={this.props.momentName}/>
                 <label for="name">First name</label>
               </div>
               <div className="md-form">
-                <textarea type="text" className="form-control md-textarea" id="description" name="description" placeholder="Enter description" ref={(input) => this.input = input} defaultValue={this.props.description}/>
+                <textarea type="text" className="form-control md-textarea" id="description" name="description" placeholder="Enter description" value={this.props.momentDescription}/>
                 <label for="name">Description</label>
               </div>
 	      <div className="md-form">
@@ -119,6 +118,19 @@ class MomentList extends Component {
   }
 }
 class CreateMomentButton extends Component {
+  constructor(props) {
+    super(props);
+    this.clickCallback = this.clickCallback.bind(this);
+  }
+
+  clickCallback() {
+    this.props.onClickEvent(
+      'moments/add',
+      'new name',
+      'new description' 
+    );
+  }
+
   render() {
     return (
       <div className="btn-wrapper">
@@ -126,7 +138,14 @@ class CreateMomentButton extends Component {
           <a className="btn btn-default" role="button">
             Albumn Mode          
           </a>
-	  <button type="button" className="btn btn-warning" data-toggle="modal" data-target="#momentEditModal">Add New Moment</button>
+	  <button 
+	    type="button" 
+	    className="btn btn-warning" 
+	    data-toggle="modal" 
+	    data-target="#momentEditModal"
+	    onClick={this.clickCallback}>
+	    Add New Moment
+	  </button>
       </div>
     )
   }
@@ -163,6 +182,26 @@ class MomentPhotosThumnail extends Component {
   }
 }
 class Profile extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      momentEditUrl: '',
+      momentName: '',
+      momentDescription: ''
+    };
+
+    this.prepopulateMomentModal = this.prepopulateMomentModal.bind(this);
+  }
+
+  prepopulateMomentModal(url, name, description) {
+    this.setState({
+      momentEditUrl: url,
+      momentName: name,
+      momentDescription: description
+    }); 
+  }
+
   render() {
     return (
       <PromiseStateContainer
@@ -174,9 +213,19 @@ class Profile extends Component {
 	        <ProfileList profiles={profiles} activeProfileId={profile.id}/>
 	      </div>
               <div className="col-xs-10">
-	        <MomentEditModal />
-	        <CreateMomentButton profileId={profile.id}/>
-	        <MomentList moments={moments} />
+	        <MomentEditModal 
+		  momentEditUrl={this.state.momentEditUrl}
+		  momentName={this.state.momentName}
+		  momentDescription={this.state.momentDescription}
+		/>
+	        <CreateMomentButton 
+		  profileId={profile.id} 
+		  onClickEvent={this.prepopulateMomentModal} 
+		/>
+	        <MomentList 
+		  moments={moments} 
+		  onClickEvent={this.prepopulateMomentModal} 
+		/>
 	      </div>
 	    </div>
           )

@@ -27454,9 +27454,6 @@ var MomentEditModal = (function (_Component) {
   _createClass(MomentEditModal, [{
     key: 'render',
     value: function render() {
-      var _this = this;
-
-      var updateUri = '/api/moments';
       return _react2['default'].createElement(
         'div',
         { className: 'modal fade', id: 'momentEditModal', tabIndex: '-1', role: 'dialog' },
@@ -27471,14 +27468,12 @@ var MomentEditModal = (function (_Component) {
               { className: 'modal-body' },
               _react2['default'].createElement(
                 'form',
-                { action: updateUri, method: 'POST', encType: 'multipart/form-data' },
+                { action: this.props.momentEditUrl, method: 'POST', encType: 'multipart/form-data' },
                 _react2['default'].createElement('input', { type: 'hidden', name: '_method', value: 'PUT' }),
                 _react2['default'].createElement(
                   'div',
                   { className: 'md-form' },
-                  _react2['default'].createElement('input', { type: 'text', className: 'form-control', id: 'name', name: 'name', placeholder: 'Enter name', ref: function (input) {
-                      return _this.input = input;
-                    }, defaultValue: this.props.name }),
+                  _react2['default'].createElement('input', { type: 'text', className: 'form-control', id: 'name', name: 'name', placeholder: 'Enter name', value: this.props.momentName }),
                   _react2['default'].createElement(
                     'label',
                     { 'for': 'name' },
@@ -27488,9 +27483,7 @@ var MomentEditModal = (function (_Component) {
                 _react2['default'].createElement(
                   'div',
                   { className: 'md-form' },
-                  _react2['default'].createElement('textarea', { type: 'text', className: 'form-control md-textarea', id: 'description', name: 'description', placeholder: 'Enter description', ref: function (input) {
-                      return _this.input = input;
-                    }, defaultValue: this.props.description }),
+                  _react2['default'].createElement('textarea', { type: 'text', className: 'form-control md-textarea', id: 'description', name: 'description', placeholder: 'Enter description', value: this.props.momentDescription }),
                   _react2['default'].createElement(
                     'label',
                     { 'for': 'name' },
@@ -27540,7 +27533,7 @@ var ProfileList = (function (_Component2) {
   _createClass(ProfileList, [{
     key: 'render',
     value: function render() {
-      var _this2 = this;
+      var _this = this;
 
       return _react2['default'].createElement(
         'div',
@@ -27554,7 +27547,7 @@ var ProfileList = (function (_Component2) {
             profileId: profile.id,
             avatar: profile.avatar,
             dateOfBirth: profile.date_of_birth,
-            activeId: _this2.props.activeProfileId
+            activeId: _this.props.activeProfileId
           });
         })
       );
@@ -27699,13 +27692,19 @@ var MomentList = (function (_Component6) {
 var CreateMomentButton = (function (_Component7) {
   _inherits(CreateMomentButton, _Component7);
 
-  function CreateMomentButton() {
+  function CreateMomentButton(props) {
     _classCallCheck(this, CreateMomentButton);
 
-    _get(Object.getPrototypeOf(CreateMomentButton.prototype), 'constructor', this).apply(this, arguments);
+    _get(Object.getPrototypeOf(CreateMomentButton.prototype), 'constructor', this).call(this, props);
+    this.clickCallback = this.clickCallback.bind(this);
   }
 
   _createClass(CreateMomentButton, [{
+    key: 'clickCallback',
+    value: function clickCallback() {
+      this.props.onClickEvent('moments/add', 'new name', 'new description');
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2['default'].createElement(
@@ -27723,7 +27722,12 @@ var CreateMomentButton = (function (_Component7) {
         ),
         _react2['default'].createElement(
           'button',
-          { type: 'button', className: 'btn btn-warning', 'data-toggle': 'modal', 'data-target': '#momentEditModal' },
+          {
+            type: 'button',
+            className: 'btn btn-warning',
+            'data-toggle': 'modal',
+            'data-target': '#momentEditModal',
+            onClick: this.clickCallback },
           'Add New Moment'
         )
       );
@@ -27809,18 +27813,37 @@ var MomentPhotosThumnail = (function (_Component9) {
 var Profile = (function (_Component10) {
   _inherits(Profile, _Component10);
 
-  function Profile() {
+  function Profile(props) {
     _classCallCheck(this, Profile);
 
-    _get(Object.getPrototypeOf(Profile.prototype), 'constructor', this).apply(this, arguments);
+    _get(Object.getPrototypeOf(Profile.prototype), 'constructor', this).call(this, props);
+
+    this.state = {
+      momentEditUrl: '',
+      momentName: '',
+      momentDescription: ''
+    };
+
+    this.prepopulateMomentModal = this.prepopulateMomentModal.bind(this);
   }
 
   // @todo Modified react-refetch/lib/components/connect.js to add xsrf token in.
   // @todo Need to rewrite it in custom components.
 
   _createClass(Profile, [{
+    key: 'prepopulateMomentModal',
+    value: function prepopulateMomentModal(url, name, description) {
+      this.setState({
+        momentEditUrl: url,
+        momentName: name,
+        momentDescription: description
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       return _react2['default'].createElement(_PromiseStateContainer2['default'], {
         ps: _reactRefetch.PromiseState.all([this.props.profilesFetch, this.props.profileFetch, this.props.momentsFetch]),
         onFulfillment: function (_ref) {
@@ -27841,9 +27864,19 @@ var Profile = (function (_Component10) {
             _react2['default'].createElement(
               'div',
               { className: 'col-xs-10' },
-              _react2['default'].createElement(MomentEditModal, null),
-              _react2['default'].createElement(CreateMomentButton, { profileId: profile.id }),
-              _react2['default'].createElement(MomentList, { moments: moments })
+              _react2['default'].createElement(MomentEditModal, {
+                momentEditUrl: _this2.state.momentEditUrl,
+                momentName: _this2.state.momentName,
+                momentDescription: _this2.state.momentDescription
+              }),
+              _react2['default'].createElement(CreateMomentButton, {
+                profileId: profile.id,
+                onClickEvent: _this2.prepopulateMomentModal
+              }),
+              _react2['default'].createElement(MomentList, {
+                moments: moments,
+                onClickEvent: _this2.prepopulateMomentModal
+              })
             )
           );
         }
