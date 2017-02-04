@@ -27473,7 +27473,13 @@ var MomentEditModal = (function (_Component) {
                 _react2['default'].createElement(
                   'div',
                   { className: 'md-form' },
-                  _react2['default'].createElement('input', { type: 'text', className: 'form-control', id: 'name', name: 'name', placeholder: 'Enter name', value: this.props.momentName }),
+                  _react2['default'].createElement('input', {
+                    type: 'text',
+                    className: 'form-control',
+                    id: 'name',
+                    name: 'name',
+                    placeholder: 'Enter name',
+                    value: this.props.momentName }),
                   _react2['default'].createElement(
                     'label',
                     { 'for': 'name' },
@@ -27483,7 +27489,13 @@ var MomentEditModal = (function (_Component) {
                 _react2['default'].createElement(
                   'div',
                   { className: 'md-form' },
-                  _react2['default'].createElement('textarea', { type: 'text', className: 'form-control md-textarea', id: 'description', name: 'description', placeholder: 'Enter description', value: this.props.momentDescription }),
+                  _react2['default'].createElement('textarea', {
+                    type: 'text',
+                    className: 'form-control md-textarea',
+                    id: 'description',
+                    name: 'description',
+                    placeholder: 'Enter description',
+                    value: this.props.momentDescription }),
                   _react2['default'].createElement(
                     'label',
                     { 'for': 'name' },
@@ -27670,6 +27682,8 @@ var MomentList = (function (_Component6) {
   _createClass(MomentList, [{
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       return this.props.moments.length ? _react2['default'].createElement(
         'ul',
         { className: 'list-group' },
@@ -27679,7 +27693,8 @@ var MomentList = (function (_Component6) {
             id: moment.id,
             name: moment.name,
             description: moment.description,
-            photos: moment.photos
+            photos: moment.photos,
+            onClickEvent: _this2.props.onClickEvent
           });
         })
       ) : _react2['default'].createElement(MomentEmptyMessage, null);
@@ -27740,13 +27755,19 @@ var CreateMomentButton = (function (_Component7) {
 var MomentListItem = (function (_Component8) {
   _inherits(MomentListItem, _Component8);
 
-  function MomentListItem() {
+  function MomentListItem(props) {
     _classCallCheck(this, MomentListItem);
 
-    _get(Object.getPrototypeOf(MomentListItem.prototype), 'constructor', this).apply(this, arguments);
+    _get(Object.getPrototypeOf(MomentListItem.prototype), 'constructor', this).call(this, props);
+    this.clickCallback = this.clickCallback.bind(this);
   }
 
   _createClass(MomentListItem, [{
+    key: 'clickCallback',
+    value: function clickCallback() {
+      this.props.onClickEvent('moments/update', 'update name', 'update description');
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2['default'].createElement(
@@ -27775,7 +27796,11 @@ var MomentListItem = (function (_Component8) {
           ),
           _react2['default'].createElement(
             _reactRouter.Link,
-            { className: 'btn-floating red waves-effect waves-light', to: '/moments/' + this.props.id + '/edit' },
+            {
+              className: 'btn-floating red waves-effect waves-light',
+              'data-toggle': 'modal',
+              'data-target': '#momentEditModal',
+              onClick: this.clickCallback },
             _react2['default'].createElement('i', { className: 'fa fa-pencil' })
           )
         )
@@ -27842,7 +27867,7 @@ var Profile = (function (_Component10) {
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       return _react2['default'].createElement(_PromiseStateContainer2['default'], {
         ps: _reactRefetch.PromiseState.all([this.props.profilesFetch, this.props.profileFetch, this.props.momentsFetch]),
@@ -27865,17 +27890,17 @@ var Profile = (function (_Component10) {
               'div',
               { className: 'col-xs-10' },
               _react2['default'].createElement(MomentEditModal, {
-                momentEditUrl: _this2.state.momentEditUrl,
-                momentName: _this2.state.momentName,
-                momentDescription: _this2.state.momentDescription
+                momentEditUrl: _this3.state.momentEditUrl,
+                momentName: _this3.state.momentName,
+                momentDescription: _this3.state.momentDescription
               }),
               _react2['default'].createElement(CreateMomentButton, {
                 profileId: profile.id,
-                onClickEvent: _this2.prepopulateMomentModal
+                onClickEvent: _this3.prepopulateMomentModal
               }),
               _react2['default'].createElement(MomentList, {
                 moments: moments,
-                onClickEvent: _this2.prepopulateMomentModal
+                onClickEvent: _this3.prepopulateMomentModal
               })
             )
           );

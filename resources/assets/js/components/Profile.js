@@ -13,11 +13,23 @@ class MomentEditModal extends Component {
             <form action={this.props.momentEditUrl} method="POST" encType="multipart/form-data">
               <input type="hidden" name="_method" value="PUT" />
               <div className="md-form">
-                <input type="text" className="form-control" id="name" name="name" placeholder="Enter name" value={this.props.momentName}/>
+                <input 
+		  type="text" 
+		  className="form-control" 
+		  id="name" 
+		  name="name" 
+		  placeholder="Enter name" 
+		  value={this.props.momentName}/>
                 <label for="name">First name</label>
               </div>
               <div className="md-form">
-                <textarea type="text" className="form-control md-textarea" id="description" name="description" placeholder="Enter description" value={this.props.momentDescription}/>
+                <textarea 
+		  type="text" 
+		  className="form-control md-textarea" 
+		  id="description" 
+		  name="description" 
+		  placeholder="Enter description" 
+		  value={this.props.momentDescription}/>
                 <label for="name">Description</label>
               </div>
 	      <div className="md-form">
@@ -103,13 +115,14 @@ class MomentList extends Component {
       this.props.moments.length ? (
       <ul className="list-group"> 
         {
-	  this.props.moments.map(function(moment) { 
+	  this.props.moments.map(moment => { 
 	    return ( <MomentListItem 
 	      key={moment.id} 
 	      id={moment.id} 
 	      name={moment.name} 
 	      description={moment.description} 
 	      photos={moment.photos} 
+	      onClickEvent={this.props.onClickEvent}
 	      ></MomentListItem>); 
 	  })
 	}
@@ -150,7 +163,21 @@ class CreateMomentButton extends Component {
     )
   }
 }
+
 class MomentListItem extends Component {
+  constructor(props) {
+    super(props);
+    this.clickCallback = this.clickCallback.bind(this);
+  }
+
+  clickCallback() {
+    this.props.onClickEvent(
+      'moments/update',
+      'update name',
+      'update description' 
+    );
+  }
+
   render() {
     return (
       <li className="list-group-item">
@@ -163,7 +190,11 @@ class MomentListItem extends Component {
 	  <div className="col-xs-4">
             <MomentPhotosThumnail/> 
 	  </div>
-	  <Link className="btn-floating red waves-effect waves-light" to={`/moments/${this.props.id}/edit`}>
+	  <Link 
+	    className="btn-floating red waves-effect waves-light" 
+	    data-toggle="modal" 
+	    data-target="#momentEditModal"
+	    onClick={this.clickCallback}>
 	    <i className="fa fa-pencil"></i>
 	  </Link>
 	</div>
