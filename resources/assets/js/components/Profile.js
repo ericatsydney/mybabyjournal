@@ -19,7 +19,8 @@ class MomentEditModal extends Component {
 		  id="name" 
 		  name="name" 
 		  placeholder="Enter name" 
-		  value={this.props.momentName}/>
+		  value={this.props.momentName}
+                />
                 <label for="name">First name</label>
               </div>
               <div className="md-form">
@@ -29,7 +30,8 @@ class MomentEditModal extends Component {
 		  id="description" 
 		  name="description" 
 		  placeholder="Enter description" 
-		  value={this.props.momentDescription}/>
+		  value={this.props.momentDescription}
+                />
                 <label for="name">Description</label>
               </div>
 	      <div className="md-form">
@@ -64,7 +66,7 @@ class ProfileList extends Component {
 	      avatar={profile.avatar} 
 	      dateOfBirth={profile.date_of_birth} 
 	      activeId={this.props.activeProfileId}
-	      ></ProfileListItem> 
+            ></ProfileListItem> 
 	  )
 	}
       </div>);
@@ -156,8 +158,8 @@ class CreateMomentButton extends Component {
 	    className="btn btn-warning" 
 	    data-toggle="modal" 
 	    data-target="#momentEditModal"
-	    onClick={this.clickCallback}>
-	    Add New Moment
+	    onClick={this.clickCallback}
+          >Add New Moment
 	  </button>
       </div>
     )
@@ -241,7 +243,10 @@ class Profile extends Component {
           return (
             <div className="profile__info">
               <div className="col-xs-2">
-	        <ProfileList profiles={profiles} activeProfileId={profile.id}/>
+	        <ProfileList 
+                  profiles={profiles} 
+                  activeProfileId={profile.id}
+                />
 	      </div>
               <div className="col-xs-10">
 	        <MomentEditModal 
