@@ -1,9 +1,11 @@
+var webpack = require("webpack");
 module.exports = {
 //  entry: './app/assets/frontend/main.jsx',
 //  output: {
 //    path: __dirname + '/app/assets/javascripts',
 //    filename: 'bundle.js'
 //  },
+  devTool: 'source-map',
   resolve: {
     extensions: ['', '.js', '.jsx']
   },
@@ -19,5 +21,17 @@ module.exports = {
         }
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin({
+      minimize: true,
+      sourceMap: false,
+      output: {
+        comments: false
+      },
+      compressor: {
+        warnings: false
+      }
+    })
+  ]
 }
