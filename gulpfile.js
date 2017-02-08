@@ -1,8 +1,10 @@
 const elixir = require('laravel-elixir');
+//const browserify = require('laravel-elixir-browserify');
 
 //require('laravel-elixir-vue-2');
 //require('laravel-elixir-livereload');
-elixir.config.sourcemaps = false;
+//elixir.config.sourcemaps = false;
+//require('laravel-elixir-webpack');
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management
@@ -15,8 +17,12 @@ elixir.config.sourcemaps = false;
  */
 
 elixir(mix => {
-    mix.sass('app.scss')
-	.browserify('app.js');
-	//.webpack('app.js')
-	//.livereload();
+ // browserify.init();
+
+  mix.sass('app.scss')
+  //   .browserify('app.js', {
+  //     fast: true,
+  //     bundleExternal: false});
+      .webpack('app.js');
+      //.livereload();
 });
