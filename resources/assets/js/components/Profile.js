@@ -4,6 +4,18 @@ import { Link } from 'react-router'
 import PromiseStateContainer from './PromiseStateContainer'
 
 class MomentEditModal extends Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange() {
+    this.props.onUserInput(
+      this.momentName.value,
+      this.momentDescription.value
+    );
+  }
+
   render() {
     return (
       <div className="modal fade" id="momentEditModal" tabIndex="-1" role="dialog">
@@ -20,8 +32,10 @@ class MomentEditModal extends Component {
 		  name="name" 
 		  placeholder="Enter name" 
 		  value={this.props.momentName}
+                  ref={(input) => this.momentName = input}
+                  onChange={this.handleChange}
                 />
-                <label for="name">First name</label>
+                <label for="name" className="active">First name</label>
               </div>
               <div className="md-form">
                 <textarea 
@@ -31,15 +45,15 @@ class MomentEditModal extends Component {
 		  name="description" 
 		  placeholder="Enter description" 
 		  value={this.props.momentDescription}
+                  ref={(input) => this.momentDescription = input}
+                  onChange={this.handleChange}
                 />
-                <label for="name">Description</label>
+                <label for="descrption" className="active">Description</label>
               </div>
-	      <div className="md-form">
-                <div className="row">
-	           <img src={this.props.avatar} className="img-circle pull-left" />
-	           <input type="file" className="form-control-file" id="avatar" name="avatar" />
-                </div>
-	        <label for="avatar">Avatar</label>
+	      <div className="form-group">
+                <label for="avatar">Avatar</label>
+	        <input type="file" className="form-control-file" id="avatar" name="avatar" />
+	        <img src={this.props.avatar} className="img-circle pull-left" />
 	      </div>
               <button type="submit" className="btn btn-primary">Submit</button>
             </form>
@@ -141,8 +155,8 @@ class CreateMomentButton extends Component {
   clickCallback() {
     this.props.onClickEvent(
       'moments/add',
-      'new name',
-      'new description' 
+      '',
+      '' 
     );
   }
 
@@ -186,19 +200,19 @@ class MomentListItem extends Component {
         <div className="row">
 	  <div className="col-xs-8">
 	    <div className="moment-name">
-	      <Link to={`/moments/${this.props.id}`}>{this.props.name}</Link>
+              <MomentPhotosThumnail/> 
 	    </div>
 	  </div>
 	  <div className="col-xs-4">
-            <MomentPhotosThumnail/> 
+            <Link to={`/moments/${this.props.id}`}>{this.props.name}</Link>
+            <Link 
+              className="btn-floating red waves-effect waves-light" 
+              data-toggle="modal" 
+              data-target="#momentEditModal"
+              onClick={this.clickCallback}>
+              <i className="fa fa-pencil"></i>
+            </Link>
 	  </div>
-	  <Link 
-	    className="btn-floating red waves-effect waves-light" 
-	    data-toggle="modal" 
-	    data-target="#momentEditModal"
-	    onClick={this.clickCallback}>
-	    <i className="fa fa-pencil"></i>
-	  </Link>
 	</div>
       </li>
     );
@@ -235,6 +249,13 @@ class Profile extends Component {
     }); 
   }
 
+  updateMoment(name) {
+    this.setState({
+      momentName: name,
+      momentDescription: description
+    });
+  }
+
   render() {
     return (
       <PromiseStateContainer
@@ -253,6 +274,7 @@ class Profile extends Component {
 		  momentEditUrl={this.state.momentEditUrl}
 		  momentName={this.state.momentName}
 		  momentDescription={this.state.momentDescription}
+                  onUserInput={this.updateMoment}
 		/>
 	        <CreateMomentButton 
 		  profileId={profile.id} 
