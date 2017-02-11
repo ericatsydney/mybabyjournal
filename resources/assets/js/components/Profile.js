@@ -138,6 +138,7 @@ class MomentList extends Component {
 	      name={moment.name} 
 	      description={moment.description} 
 	      photos={moment.photos} 
+              profileId={this.props.profileId} 
 	      onClickEvent={this.props.onClickEvent}
 	      ></MomentListItem>); 
 	  })
@@ -146,6 +147,7 @@ class MomentList extends Component {
     )
   }
 }
+
 class CreateMomentButton extends Component {
   constructor(props) {
     super(props);
@@ -188,8 +190,8 @@ class MomentListItem extends Component {
 
   clickCallback() {
     this.props.onClickEvent(
-      'moments/update',
-      'update name',
+      `profiles/${this.props.profileId}/moments/${this.props.id}`,
+      `${this.props.name}`,
       'update description' 
     );
   }
@@ -218,6 +220,7 @@ class MomentListItem extends Component {
     );
   }
 }
+
 class MomentPhotosThumnail extends Component {
   render() {
     return (
@@ -228,6 +231,7 @@ class MomentPhotosThumnail extends Component {
     );
   }
 }
+
 class Profile extends Component {
   constructor(props) {
     super(props);
@@ -282,6 +286,7 @@ class Profile extends Component {
 		/>
 	        <MomentList 
 		  moments={moments} 
+		  profileId={profile.id} 
 		  onClickEvent={this.prepopulateMomentModal} 
 		/>
 	      </div>
