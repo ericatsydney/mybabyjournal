@@ -17,13 +17,19 @@ class MomentEditModal extends Component {
   }
 
   render() {
+    let pattern = /^profiles\/(\d+)\/moments$/;
+    let hiddenMethod = <input type="hidden" name="_method" value="PUT" />;
+    // For create moment action, we don't need this hidden field.
+    if (pattern.test(this.props.momentEditUrl)) {
+      hiddenMethod = null;
+    }
     return (
       <div className="modal fade" id="momentEditModal" tabIndex="-1" role="dialog">
         <div className="modal-dialog" role="document">
           <div className="modal-content">
           <div className="modal-body">
             <form action={this.props.momentEditUrl} method="POST" encType="multipart/form-data">
-              <input type="hidden" name="_method" value="PUT" />
+              {hiddenMethod}
               <div className="md-form">
                 <input 
 		  type="text" 
@@ -156,7 +162,7 @@ class CreateMomentButton extends Component {
 
   clickCallback() {
     this.props.onClickEvent(
-      'moments/add',
+      `profiles/${this.props.profileId}/moments`,
       '',
       '' 
     );
