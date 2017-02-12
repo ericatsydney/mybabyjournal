@@ -17,8 +17,8 @@ class MomentEditModal extends Component {
   }
 
   render() {
-    let pattern = /^profiles\/(\d+)\/moments$/;
-    let hiddenMethod = <input type="hidden" name="_method" value="PUT" />;
+    let pattern = /^\/api\/profiles\/(\d+)\/moments$/;
+    let hiddenMethod = <input type="hidden" name="_method" value="PUT"></input>;
     // For create moment action, we don't need this hidden field.
     if (pattern.test(this.props.momentEditUrl)) {
       hiddenMethod = null;
@@ -57,8 +57,8 @@ class MomentEditModal extends Component {
                 <label for="descrption" className="active">Description</label>
               </div>
 	      <div className="form-group">
-                <label for="avatar">Avatar</label>
-	        <input type="file" className="form-control-file" id="avatar" name="avatar" />
+                <label for="photos">Avatar</label>
+	        <input type="file" className="form-control-file" id="photos" name="photos" />
 	        <img src={this.props.avatar} className="img-circle pull-left" />
 	      </div>
               <button type="submit" className="btn btn-primary">Submit</button>
@@ -162,7 +162,7 @@ class CreateMomentButton extends Component {
 
   clickCallback() {
     this.props.onClickEvent(
-      `profiles/${this.props.profileId}/moments`,
+      `/api/profiles/${this.props.profileId}/moments`,
       '',
       '' 
     );
@@ -196,7 +196,7 @@ class MomentListItem extends Component {
 
   clickCallback() {
     this.props.onClickEvent(
-      `profiles/${this.props.profileId}/moments/${this.props.id}`,
+      `/api/profiles/${this.props.profileId}/moments/${this.props.id}`,
       `${this.props.name}`,
       'update description' 
     );

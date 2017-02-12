@@ -82,8 +82,24 @@ class ProfileMomentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id) {
-        //
+    public function update(Request $request, $profile_id, $id) {
+      // @todo check the profile_id
+      $moment = Moment::findOrFail($id);
+      $file = $request->file('photos');
+      //@todo this will be uncomment after testing.
+      //$file_path = $file->storeAs('avatars/' . auth()->id(),  'avatar.png');
+      $file_path = $file->store('photos');
+      $result = $request->all();
+      //@todo this will be uncomment after testing.
+      //$result['avatar'] = 'avatars/' . auth()->id() . '/avatar.png';
+      $result['photos'] = $file_path;
+
+      if ($moment->update($result)) {
+	return redirect('profiles/'. $id);
+      }
+      else {
+	return 'Fail';
+      }
     }
 
     /**
