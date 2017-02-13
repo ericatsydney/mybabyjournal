@@ -3,6 +3,27 @@ import { connect, PromiseState } from 'react-refetch'
 import { Link } from 'react-router'
 import PromiseStateContainer from './PromiseStateContainer'
 
+class MomentDeleteModal extends Component {
+  render() {
+    return (
+      <div className="modal fade" id="momentDeleteModal" tabIndex="-1" role="dialog">
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+          <div className="modal-body">
+            <form action={this.props.momentEditUrl} method="POST" encType="multipart/form-data">
+              <p>You are going to delete the data in this profile. The action cannot be reverted.</p>
+              <input type="hidden" name="_method" value="DELETE"></input>
+              <button type="submit" className="btn btn-danger">Delete</button>
+              <button className="btn btn-grey">Cancel</button>
+            </form>
+	  </div>
+	  </div>
+	</div>
+      </div>
+    );
+  }
+}
+
 class MomentEditModal extends Component {
   constructor(props) {
     super(props);
@@ -198,7 +219,7 @@ class MomentListItem extends Component {
     this.props.onClickEvent(
       `/api/profiles/${this.props.profileId}/moments/${this.props.id}`,
       `${this.props.name}`,
-      'update description' 
+      `${this.props.description}`
     );
   }
 
@@ -225,7 +246,10 @@ class MomentListItem extends Component {
               <i className="fa fa-pencil"></i>
             </Link>
             <Link 
-              className="btn-floating grey waves-effect waves-light" >
+              className="btn-floating grey waves-effect waves-light" 
+              data-toggle="modal" 
+              data-target="#momentDeleteModal"
+              onClick={this.clickCallback}>
               <i className="fa fa-trash"></i>
             </Link>
 	  </div>
@@ -287,6 +311,9 @@ class Profile extends Component {
 		  momentName={this.state.momentName}
 		  momentDescription={this.state.momentDescription}
                   onUserInput={this.updateMoment}
+		/>
+	        <MomentDeleteModal 
+		  momentEditUrl={this.state.momentEditUrl}
 		/>
 	        <CreateMomentButton 
 		  profileId={profile.id} 
