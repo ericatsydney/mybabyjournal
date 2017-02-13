@@ -171,13 +171,13 @@ class CreateMomentButton extends Component {
   render() {
     return (
       <div className="btn-wrapper">
-	  <Link className="btn btn-default" to={`/profiles/${this.props.profileId}/edit`}>Edit Profile</Link>
-          <a className="btn btn-default" role="button">
+	  <Link className="btn btn-cyan" to={`/profiles/${this.props.profileId}/edit`}>Edit Profile</Link>
+          <a className="btn btn-cyan" role="button">
             Albumn Mode          
           </a>
 	  <button 
 	    type="button" 
-	    className="btn btn-warning" 
+	    className="btn btn-amber" 
 	    data-toggle="modal" 
 	    data-target="#momentEditModal"
 	    onClick={this.clickCallback}
@@ -206,19 +206,27 @@ class MomentListItem extends Component {
     return (
       <li className="list-group-item">
         <div className="row">
-	  <div className="col-xs-8">
+	  <div className="col-xs-5">
 	    <div className="moment-name">
               <MomentPhotosThumnail/> 
 	    </div>
 	  </div>
-	  <div className="col-xs-4">
-            <Link to={`/moments/${this.props.id}`}>{this.props.name}</Link>
+	  <div className="col-xs-5">
+            <h3>
+              <Link to={`/moments/${this.props.id}`}>{this.props.name}</Link>
+            </h3>
+	  </div>
+	  <div className="col-xs-2">
             <Link 
-              className="btn-floating red waves-effect waves-light" 
+              className="btn-floating btn-cyan waves-effect waves-light" 
               data-toggle="modal" 
               data-target="#momentEditModal"
               onClick={this.clickCallback}>
               <i className="fa fa-pencil"></i>
+            </Link>
+            <Link 
+              className="btn-floating grey waves-effect waves-light" >
+              <i className="fa fa-trash"></i>
             </Link>
 	  </div>
 	</div>
@@ -273,12 +281,6 @@ class Profile extends Component {
         onFulfillment={([profiles, profile, moments]) => {
           return (
             <div className="profile__info">
-              <div className="col-xs-2">
-	        <ProfileList 
-                  profiles={profiles} 
-                  activeProfileId={profile.id}
-                />
-	      </div>
               <div className="col-xs-10">
 	        <MomentEditModal 
 		  momentEditUrl={this.state.momentEditUrl}
@@ -295,6 +297,12 @@ class Profile extends Component {
 		  profileId={profile.id} 
 		  onClickEvent={this.prepopulateMomentModal} 
 		/>
+	      </div>
+              <div className="col-xs-2">
+	        <ProfileList 
+                  profiles={profiles} 
+                  activeProfileId={profile.id}
+                />
 	      </div>
 	    </div>
           )

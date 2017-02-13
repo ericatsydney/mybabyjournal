@@ -11,6 +11,12 @@
 </head>
 
 <body>
+  <!--Navbar-->
+  <nav class="navbar navbar-toggleable-md navbar-dark unique-color">
+    <a class="navbar-brand" href="#">
+      <strong>My Baby Journal</strong>
+    </a>
+  </nav>
   <div class="container">
     <div id="app" class="row"></div>
   </div>
