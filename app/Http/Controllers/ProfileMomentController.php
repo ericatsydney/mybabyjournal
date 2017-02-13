@@ -116,7 +116,7 @@ class ProfileMomentController extends Controller
           throw new NotFoundHttpException;
       }
       if($moment->delete()) {
-        return 'succeed';
+	return redirect('profiles/'. $profile_id);
       }
       else {
 	return 'fail';
