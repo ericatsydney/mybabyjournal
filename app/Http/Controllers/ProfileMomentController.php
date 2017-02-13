@@ -38,11 +38,12 @@ class ProfileMomentController extends Controller
     public function store(Request $request, $profile_id) {
       $moment = new Moment;
       $moment->name = $request->get('name');
-      $moment->photos = $request->get('photos');
+      $file_path = $request->file('photos');
+      $moment->photos = $file_path;
       $moment->description = $request->get('description');
       $moment->profile_id = $profile_id;
       if ($moment->save()) {
-        return 'succeed';
+	return redirect('profiles/'. $profile_id);
       }
       else {
 	return 'fail';
@@ -86,16 +87,17 @@ class ProfileMomentController extends Controller
       // @todo check the profile_id
       $moment = Moment::findOrFail($id);
       $file = $request->file('photos');
-      //@todo this will be uncomment after testing.
-      //$file_path = $file->storeAs('avatars/' . auth()->id(),  'avatar.png');
-      $file_path = $file->store('photos');
       $result = $request->all();
-      //@todo this will be uncomment after testing.
-      //$result['avatar'] = 'avatars/' . auth()->id() . '/avatar.png';
-      $result['photos'] = $file_path;
+      if (is_null($file)) {
+        $result['photos'] = $moment->photos;
+      }
+      else {
+        $file_path = $file->store('photos');
+        $result['photos'] = $file_path;
+      }
 
       if ($moment->update($result)) {
-	return redirect('profiles/'. $id);
+	return redirect('profiles/'. $profile_id);
       }
       else {
 	return 'Fail';
