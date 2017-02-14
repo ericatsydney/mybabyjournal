@@ -38,8 +38,14 @@ class ProfileMomentController extends Controller
     public function store(Request $request, $profile_id) {
       $moment = new Moment;
       $moment->name = $request->get('name');
-      $file_path = $request->file('photos');
-      $moment->photos = $file_path;
+      $file = $request->file('photos');
+      if (is_null($file)) {
+        $moment->photos = '';
+      }
+      else {
+        $file_path = $file->store('photos');
+        $moment->photos = $file_path;
+      }
       $moment->description = $request->get('description');
       $moment->profile_id = $profile_id;
       if ($moment->save()) {
