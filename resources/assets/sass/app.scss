@@ -5,8 +5,8 @@
 // Variables
 @import "variables";
 
-// Bootstrap
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+// mdbootstrap
+@import "node_modules/materialize-css/sass/materialize";
 
 // @todo The following is the hack for MDB
 .card-block {
@@ -63,4 +63,8 @@
     padding-top: 15px;
     margin-bottom: 0;
     z-index: 998;
+}
+
+.navbar-brand strong {
+  line-height: 40px;
 }
