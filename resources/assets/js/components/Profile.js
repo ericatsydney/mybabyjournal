@@ -192,13 +192,13 @@ class CreateMomentButton extends Component {
   render() {
     return (
       <div className="btn-wrapper">
-	  <Link className="btn btn-cyan" to={`/profiles/${this.props.profileId}/edit`}>Edit Profile</Link>
-          <a className="btn btn-cyan" role="button">
+	  <Link className="btn" to={`/profiles/${this.props.profileId}/edit`}>Edit Profile</Link>
+          <a className="btn" role="button">
             Albumn Mode          
           </a>
 	  <button 
 	    type="button" 
-	    className="btn btn-amber" 
+	    className="btn success" 
 	    data-toggle="modal" 
 	    data-target="#momentEditModal"
 	    onClick={this.clickCallback}
@@ -291,7 +291,7 @@ class Profile extends Component {
     }); 
   }
 
-  updateMoment(name) {
+  updateMoment(name, description) {
     this.setState({
       momentName: name,
       momentDescription: description
