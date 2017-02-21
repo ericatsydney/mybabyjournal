@@ -2,96 +2,9 @@ import React, { Component, PropTypes } from 'react'
 import { connect, PromiseState } from 'react-refetch'
 import { Link } from 'react-router'
 import PromiseStateContainer from '../app/PromiseStateContainer'
-
-class MomentDeleteModal extends Component {
-  render() {
-    return (
-      <div className="modal fade" id="momentDeleteModal" tabIndex="-1" role="dialog">
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-          <div className="modal-body">
-            <form action={this.props.momentEditUrl} method="POST" encType="multipart/form-data">
-              <p>You are going to delete the data in this profile. The action cannot be reverted.</p>
-              <input type="hidden" name="_method" value="DELETE"></input>
-              <button type="submit" className="btn btn-danger">Delete</button>
-              <button className="btn btn-grey">Cancel</button>
-            </form>
-	  </div>
-	  </div>
-	</div>
-      </div>
-    );
-  }
-}
-
-class MomentEditModal extends Component {
-  constructor(props) {
-    super(props);
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange() {
-    this.props.onUserInput(
-      this.momentName.value,
-      this.momentDescription.value
-    );
-  }
-
-  componentDidMount() {
-    // componentDidMount is the ready event for react
-    $('.modal').modal();
-  }
-
-  render() {
-    let pattern = /^\/api\/profiles\/(\d+)\/moments$/;
-    let hiddenMethod = <input type="hidden" name="_method" value="PUT"></input>;
-    // For create moment action, we don't need this hidden field.
-    if (pattern.test(this.props.momentEditUrl)) {
-      hiddenMethod = null;
-    }
-    return (
-      <div className="modal" id="momentEditModal">
-        <div className="modal-content">
-          <form action={this.props.momentEditUrl} method="POST" encType="multipart/form-data">
-            {hiddenMethod}
-            <div className="md-form">
-              <input 
-                type="text" 
-                className="form-control" 
-                id="name" 
-                name="name" 
-                placeholder="Enter name" 
-                value={this.props.momentName}
-                ref={(input) => this.momentName = input}
-                onChange={this.handleChange}
-              />
-              <label for="name" className="active">First name</label>
-            </div>
-            <div className="md-form">
-              <textarea 
-                type="text" 
-                className="form-control md-textarea" 
-                id="description" 
-                name="description" 
-                placeholder="Enter description" 
-                value={this.props.momentDescription}
-                ref={(input) => this.momentDescription = input}
-                onChange={this.handleChange}
-              />
-              <label for="descrption" className="active">Description</label>
-            </div>
-            <div className="form-group">
-              <label for="photos">Avatar</label>
-              <input type="file" className="form-control-file" id="photos" name="photos" />
-              <img src={this.props.avatar} className="img-circle pull-left" />
-            </div>
-            <button type="submit" className="btn btn-primary">Submit</button>
-          </form>
-        </div>
-      </div>
-    );
-  }
-}
+import MomentEditModal from './MomentEditModal'
+import MomentDeleteModal from './MomentDeleteModal'
+import MomentList from './MomentList'
 
 class ProfileList extends Component {
   render() {
@@ -140,41 +53,6 @@ class ProfileAvatar extends Component {
     );
   }
 }
-class MomentEmptyMessage extends Component {
-  render() {
-    return (
-      <div className="card">
-        <div className="card-block">
-          <h4 className="card-title">Opps there is no moment yet</h4>
-          <p className="card-text">Create a new one.</p>
-          <a className="btn btn-primary">Create a Moment</a>
-        </div>
-      </div>
-    );
-  }
-}
-class MomentList extends Component {
-  render() {
-    return (
-      this.props.moments.length ? (
-      <ul className="list-group"> 
-        {
-	  this.props.moments.map(moment => { 
-	    return ( <MomentListItem 
-	      key={moment.id} 
-	      id={moment.id} 
-	      name={moment.name} 
-	      description={moment.description} 
-	      photos={moment.photos} 
-              profileId={this.props.profileId} 
-	      onClickEvent={this.props.onClickEvent}
-	      ></MomentListItem>); 
-	  })
-	}
-      </ul>) : <MomentEmptyMessage/>
-    )
-  }
-}
 
 class CreateMomentButton extends Component {
   constructor(props) {
@@ -205,66 +83,6 @@ class CreateMomentButton extends Component {
 	  </button>
       </div>
     )
-  }
-}
-
-class MomentListItem extends Component {
-  constructor(props) {
-    super(props);
-    this.clickCallback = this.clickCallback.bind(this);
-  }
-
-  clickCallback() {
-    this.props.onClickEvent(
-      `/api/profiles/${this.props.profileId}/moments/${this.props.id}`,
-      `${this.props.name}`,
-      `${this.props.description}`
-    );
-  }
-
-  render() {
-    return (
-      <li className="list-group-item">
-        <div className="row">
-	  <div className="col-xs-5">
-	    <div className="moment-name">
-              <MomentPhotosThumnail/> 
-	    </div>
-	  </div>
-	  <div className="col-xs-5">
-            <h3>
-              <Link to={`/moments/${this.props.id}`}>{this.props.name}</Link>
-            </h3>
-	  </div>
-	  <div className="col-xs-2">
-            <Link 
-              className="btn-floating red waves-effect waves-light modal-trigger" 
-              data-target="momentEditModal"
-              onClick={this.clickCallback}>
-              <i className="fa fa-pencil"></i>
-            </Link>
-            <Link 
-              className="btn-floating grey waves-effect waves-light" 
-              data-toggle="modal" 
-              data-target="#momentDeleteModal"
-              onClick={this.clickCallback}>
-              <i className="fa fa-trash"></i>
-            </Link>
-	  </div>
-	</div>
-      </li>
-    );
-  }
-}
-
-class MomentPhotosThumnail extends Component {
-  render() {
-    return (
-      <div className="moment-photo-thunmnail">
-        <img src="http://placehold.it/50x50" className="img-thumbnail"/>
-        <img src="http://placehold.it/50x50" className="img-thumbnail"/>
-      </div>
-    );
   }
 }
 
