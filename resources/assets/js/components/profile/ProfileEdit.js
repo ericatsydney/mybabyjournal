@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect, PromiseState } from 'react-refetch'
 import { Link } from 'react-router'
-import PromiseStateContainer from './PromiseStateContainer'
+import PromiseStateContainer from '../app/PromiseStateContainer'
 
 class ProfileEditForm extends Component {
   render() {

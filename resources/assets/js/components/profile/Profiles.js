@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect, PromiseState } from 'react-refetch'
 import { Link } from 'react-router'
-import PromiseStateContainer from './PromiseStateContainer'
+import PromiseStateContainer from '../app/PromiseStateContainer'
 
 class Profiles extends Component {
 

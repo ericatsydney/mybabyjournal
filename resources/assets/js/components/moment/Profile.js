@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect, PromiseState } from 'react-refetch'
 import { Link } from 'react-router'
-import PromiseStateContainer from './PromiseStateContainer'
+import PromiseStateContainer from '../app/PromiseStateContainer'
 
 class MomentDeleteModal extends Component {
   render() {
@@ -37,6 +37,11 @@ class MomentEditModal extends Component {
     );
   }
 
+  componentDidMount() {
+    // componentDidMount is the ready event for react
+    $('.modal').modal();
+  }
+
   render() {
     let pattern = /^\/api\/profiles\/(\d+)\/moments$/;
     let hiddenMethod = <input type="hidden" name="_method" value="PUT"></input>;
@@ -45,48 +50,44 @@ class MomentEditModal extends Component {
       hiddenMethod = null;
     }
     return (
-      <div className="modal fade" id="momentEditModal" tabIndex="-1" role="dialog">
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-          <div className="modal-body">
-            <form action={this.props.momentEditUrl} method="POST" encType="multipart/form-data">
-              {hiddenMethod}
-              <div className="md-form">
-                <input 
-		  type="text" 
-		  className="form-control" 
-		  id="name" 
-		  name="name" 
-		  placeholder="Enter name" 
-		  value={this.props.momentName}
-                  ref={(input) => this.momentName = input}
-                  onChange={this.handleChange}
-                />
-                <label for="name" className="active">First name</label>
-              </div>
-              <div className="md-form">
-                <textarea 
-		  type="text" 
-		  className="form-control md-textarea" 
-		  id="description" 
-		  name="description" 
-		  placeholder="Enter description" 
-		  value={this.props.momentDescription}
-                  ref={(input) => this.momentDescription = input}
-                  onChange={this.handleChange}
-                />
-                <label for="descrption" className="active">Description</label>
-              </div>
-	      <div className="form-group">
-                <label for="photos">Avatar</label>
-	        <input type="file" className="form-control-file" id="photos" name="photos" />
-	        <img src={this.props.avatar} className="img-circle pull-left" />
-	      </div>
-              <button type="submit" className="btn btn-primary">Submit</button>
-            </form>
-	  </div>
-	  </div>
-	</div>
+      <div className="modal" id="momentEditModal">
+        <div className="modal-content">
+          <form action={this.props.momentEditUrl} method="POST" encType="multipart/form-data">
+            {hiddenMethod}
+            <div className="md-form">
+              <input 
+                type="text" 
+                className="form-control" 
+                id="name" 
+                name="name" 
+                placeholder="Enter name" 
+                value={this.props.momentName}
+                ref={(input) => this.momentName = input}
+                onChange={this.handleChange}
+              />
+              <label for="name" className="active">First name</label>
+            </div>
+            <div className="md-form">
+              <textarea 
+                type="text" 
+                className="form-control md-textarea" 
+                id="description" 
+                name="description" 
+                placeholder="Enter description" 
+                value={this.props.momentDescription}
+                ref={(input) => this.momentDescription = input}
+                onChange={this.handleChange}
+              />
+              <label for="descrption" className="active">Description</label>
+            </div>
+            <div className="form-group">
+              <label for="photos">Avatar</label>
+              <input type="file" className="form-control-file" id="photos" name="photos" />
+              <img src={this.props.avatar} className="img-circle pull-left" />
+            </div>
+            <button type="submit" className="btn btn-primary">Submit</button>
+          </form>
+        </div>
       </div>
     );
   }
@@ -197,11 +198,9 @@ class CreateMomentButton extends Component {
             Albumn Mode          
           </a>
 	  <button 
-	    type="button" 
-	    className="btn success" 
-	    data-toggle="modal" 
-	    data-target="#momentEditModal"
-	    onClick={this.clickCallback}
+	    className="waves-effect waves-light btn modal-trigger" 
+            onClick={this.clickCallback}
+            data-target="momentEditModal"
           >Add New Moment
 	  </button>
       </div>
@@ -239,9 +238,8 @@ class MomentListItem extends Component {
 	  </div>
 	  <div className="col-xs-2">
             <Link 
-              className="btn-floating btn-cyan waves-effect waves-light" 
-              data-toggle="modal" 
-              data-target="#momentEditModal"
+              className="btn-floating red waves-effect waves-light modal-trigger" 
+              data-target="momentEditModal"
               onClick={this.clickCallback}>
               <i className="fa fa-pencil"></i>
             </Link>
@@ -306,15 +304,6 @@ class Profile extends Component {
           return (
             <div className="profile__info">
               <div className="col-xs-10">
-	        <MomentEditModal 
-		  momentEditUrl={this.state.momentEditUrl}
-		  momentName={this.state.momentName}
-		  momentDescription={this.state.momentDescription}
-                  onUserInput={this.updateMoment}
-		/>
-	        <MomentDeleteModal 
-		  momentEditUrl={this.state.momentEditUrl}
-		/>
 	        <CreateMomentButton 
 		  profileId={profile.id} 
 		  onClickEvent={this.prepopulateMomentModal} 
@@ -330,6 +319,17 @@ class Profile extends Component {
                   profiles={profiles} 
                   activeProfileId={profile.id}
                 />
+	      </div>
+              <div className="col-xs-12">
+	        <MomentEditModal 
+		  momentEditUrl={this.state.momentEditUrl}
+		  momentName={this.state.momentName}
+		  momentDescription={this.state.momentDescription}
+                  onUserInput={this.updateMoment}
+		/>
+	        <MomentDeleteModal 
+		  momentEditUrl={this.state.momentEditUrl}
+		/>
 	      </div>
 	    </div>
           )
