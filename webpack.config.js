@@ -5,10 +5,24 @@ module.exports = {
 //    path: __dirname + '/app/assets/javascripts',
 //    filename: 'bundle.js'
 //  },
+
+//Main configuration object for project
+  entry: {
+    app: './resources/assets/js/app.js',
+    vendor: ['react', 'react-dom']
+  },
+
+  output: {
+    path: require('path').resolve('./public/js'),
+    filename: 'app.js'
+  },
+
   devTool: 'source-map',
+
   resolve: {
     extensions: ['', '.js', '.jsx']
   },
+
   module: {
     loaders: [
       {
@@ -32,6 +46,7 @@ module.exports = {
       compressor: {
         warnings: false
       }
-    })
+    }),
+    new webpack.optimize.CommonsChunkPlugin({name:'vendor', filename:'vendor.bundle.js'})
   ]
 }
