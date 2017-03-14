@@ -8,63 +8,69 @@
 // mdbootstrap
 @import "node_modules/materialize-css/sass/materialize";
 
-// @todo The following is the hack for MDB
-.card-block {
-    -webkit-box-flex: 1;
-    -webkit-flex: 1 1 auto;
-    -ms-flex: 1 1 auto;
-    flex: 1 1 auto;
-    padding: 1.25rem;
-}
-
-.btn-floating,.btn-floating i {
-    color: #fff;
-    display: inline-block;
-    line-height: 37px
-}
-
-.btn-floating {
+// @todo We need to split these coding.
+.timeline {
+  border-left: 3px solid #00BCD4;
+  border-bottom-right-radius: 2px;
+  border-top-right-radius: 2px;
+  position: relative;
+  padding: 0 30px;
+  margin-left: 280px;
+  
+  .item {
     position: relative;
-    overflow: hidden;
-    z-index: 1;
-    width: 37px;
-    height: 37px;
-    padding: 0;
-    background-color: #a6c;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
-    border-radius: 50%;
-    transition: .3s;
-    margin: 10px
-}
+    margin-bottom: 45px;
+    list-style: none;
 
-.btn-flat,.btn-flat:focus {
-    background-color: transparent
-}
+    .moment-meta {
+      position: absolute;
+      left: -280px;
+      top: 0;
+    }
 
-.btn-floating i {
-    width: inherit;
-    text-align: center;
-    font-size: 1.6rem
-}
+    .moment-title {
+      font-size: 18px;
+      color: #00BCD4;
+    }
 
-.btn-floating {
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);
-}
-.btn-floating:hover {
-    box-shadow: 0 5px 11px 0 rgba(0,0,0,.18),0 4px 15px 0 rgba(0,0,0,.15);
-}
-.fixed-action-btn {
-    position: fixed;
-    right: 23px;
-    bottom: 23px;
-    padding-top: 15px;
-    margin-bottom: 0;
-    z-index: 998;
-}
+    &:before {
+      content: "";
+      position: absolute;
+      left: -43px;
+      top: 0;
+      display: inline-block;
+      width: 22px;
+      height: 22px;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      -ms-border-radius: 50%;
+      -o-border-radius: 50%;
+      border-radius: 50%;
+      -moz-background-clip: padding;
+      -webkit-background-clip: padding-box;
+      background-clip: padding-box;
+      background: #fff;
+      border: 3px solid #00BCD4;
+    }
 
-.navbar-brand strong {
-  line-height: 40px;
+    &:after {
+      content: "";
+      position: absolute;
+      left: -37px;
+      top: 6px;
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      -ms-border-radius: 50%;
+      -o-border-radius: 50%;
+      border-radius: 50%;
+      -moz-background-clip: padding;
+      -webkit-background-clip: padding-box;
+      background-clip: padding-box;
+      background: #00BCD4;
+      z-index: 10;
+    }
+  }
 }

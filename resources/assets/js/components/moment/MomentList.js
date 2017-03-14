@@ -6,7 +6,7 @@ class MomentList extends Component {
   render() {
     return (
       this.props.moments.length ? (
-      <ul className="list-group"> 
+      <ul className="timeline browser-default"> 
         {
 	  this.props.moments.map(moment => { 
 	    return ( <MomentListItem 

@@ -18,32 +18,32 @@ class MomentListItem extends Component {
 
   render() {
     return (
-      <li className="list-group-item">
-        <div className="row">
-	  <div className="col-xs-5">
-	    <div className="moment-name">
-              <MomentPhotosThumnail/> 
-	    </div>
-	  </div>
-	  <div className="col-xs-5">
-            <h3>
-              <Link to={`/moments/${this.props.id}`}>{this.props.name}</Link>
-            </h3>
-	  </div>
-	  <div className="col-xs-2">
+      <li className="item">
+        <div className="moment-meta">
+          <div className="moment-title">
+            <Link to={`/moments/${this.props.id}`}>{this.props.name}</Link>
+          </div>
             <Link 
               className="btn-floating red waves-effect waves-light modal-trigger" 
               data-target="momentEditModal"
               onClick={this.clickCallback}>
-              <i className="fa fa-pencil"></i>
+              <i className="material-icons">mode_edit</i>
             </Link>
             <Link 
               className="btn-floating grey waves-effect waves-light" 
               data-toggle="modal" 
               data-target="#momentDeleteModal"
               onClick={this.clickCallback}>
-              <i className="fa fa-trash"></i>
+              <i className="material-icons">delete</i>
             </Link>
+        </div>
+        <div className="moment-desc">
+          <div className="location">
+            <i className="tiny material-icons">place</i>
+            Brisbane
+          </div>
+	  <div className="col-xs-5">
+            <MomentPhotosThumnail/> 
 	  </div>
 	</div>
       </li>

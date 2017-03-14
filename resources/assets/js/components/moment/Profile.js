@@ -121,7 +121,7 @@ class Profile extends Component {
         onFulfillment={([profiles, profile, moments]) => {
           return (
             <div className="profile__info">
-              <div className="col-xs-10">
+              <div className="col s12">
 	        <CreateMomentButton 
 		  profileId={profile.id} 
 		  onClickEvent={this.prepopulateMomentModal} 
@@ -132,13 +132,13 @@ class Profile extends Component {
 		  onClickEvent={this.prepopulateMomentModal} 
 		/>
 	      </div>
-              <div className="col-xs-2">
+              <div className="col s12">
 	        <ProfileList 
                   profiles={profiles} 
                   activeProfileId={profile.id}
                 />
 	      </div>
-              <div className="col-xs-12">
+              <div className="col s12">
 	        <MomentEditModal 
 		  momentEditUrl={this.state.momentEditUrl}
 		  momentName={this.state.momentName}
