@@ -41,7 +41,7 @@ class MomentEditModal extends Component {
                 ref={(input) => this.momentName = input}
                 onChange={this.handleChange}
               />
-              <label for="name" className="active">First name</label>
+              <label htmlFor="name" className="active">First name</label>
             </div>
             <div className="md-form">
               <textarea 
@@ -54,10 +54,10 @@ class MomentEditModal extends Component {
                 ref={(input) => this.momentDescription = input}
                 onChange={this.handleChange}
               />
-              <label for="descrption" className="active">Description</label>
+              <label htmlFor="descrption" className="active">Description</label>
             </div>
             <div className="form-group">
-              <label for="photos">Avatar</label>
+              <label htmlFor="photos">Avatar</label>
               <input type="file" className="form-control-file" id="photos" name="photos" />
               <img src={this.props.avatar} className="img-circle pull-left" />
             </div>

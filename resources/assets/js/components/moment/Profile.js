@@ -5,86 +5,8 @@ import PromiseStateContainer from '../app/PromiseStateContainer'
 import MomentEditModal from './MomentEditModal'
 import MomentDeleteModal from './MomentDeleteModal'
 import MomentList from './MomentList'
+import ProfileList from './ProfileInformation'
 
-class ProfileList extends Component {
-  render() {
-    return (
-      <div className="list-group"> 
-        {
-	  this.props.profiles.map(profile =>  
-	    <ProfileListItem 
-	      key={profile.id} 
-	      firstName={profile.first_name} 
-	      lastName={profile.last_name} 
-	      gender={profile.gender} 
-	      profileId={profile.id} 
-	      avatar={profile.avatar} 
-	      dateOfBirth={profile.date_of_birth} 
-	      activeId={this.props.activeProfileId}
-            ></ProfileListItem> 
-	  )
-	}
-      </div>);
-  }
-}
-class ProfileListItem extends Component {
-  render() {
-    let classes = "list-group-item";
-    classes += this.props.activeId === this.props.profileId ? ' active' : '';
-
-    return (
-      <Link to={`/profiles/${this.props.profileId}`} className={classes}>
-        <div className="row">
-	  <div className="col-xs-5">
-            <ProfileAvatar avatar={this.props.avatar}/> 
-	  </div>
-	  <div className="col-xs-7">
-            {this.props.firstName} {this.props.lastName}
-	  </div>
-	</div>
-      </Link>
-    );
-  }
-}
-class ProfileAvatar extends Component {
-  render() {
-    return (
-      <img src={this.props.avatar} className="img-circle" width="50" height="50" />
-    );
-  }
-}
-
-class CreateMomentButton extends Component {
-  constructor(props) {
-    super(props);
-    this.clickCallback = this.clickCallback.bind(this);
-  }
-
-  clickCallback() {
-    this.props.onClickEvent(
-      `/api/profiles/${this.props.profileId}/moments`,
-      '',
-      '' 
-    );
-  }
-
-  render() {
-    return (
-      <div className="btn-wrapper">
-	  <Link className="btn" to={`/profiles/${this.props.profileId}/edit`}>Edit Profile</Link>
-          <a className="btn" role="button">
-            Albumn Mode          
-          </a>
-	  <button 
-	    className="waves-effect waves-light btn modal-trigger" 
-            onClick={this.clickCallback}
-            data-target="momentEditModal"
-          >Add New Moment
-	  </button>
-      </div>
-    )
-  }
-}
 
 class Profile extends Component {
   constructor(props) {
@@ -122,22 +44,23 @@ class Profile extends Component {
           return (
             <div className="profile__info">
               <div className="col s12">
-	        <CreateMomentButton 
-		  profileId={profile.id} 
-		  onClickEvent={this.prepopulateMomentModal} 
-		/>
-	        <MomentList 
-		  moments={moments} 
-		  profileId={profile.id} 
-		  onClickEvent={this.prepopulateMomentModal} 
-		/>
-	      </div>
-              <div className="col s12">
 	        <ProfileList 
                   profiles={profiles} 
                   activeProfileId={profile.id}
+                  onClickEvent={this.prepopulateMomentModal} 
                 />
 	      </div>
+              <div className="timeline-wrapper container">
+                <div className="row z-depth-3">
+                  <div className="col s12">
+                    <MomentList 
+                      moments={moments} 
+                      profileId={profile.id} 
+                      onClickEvent={this.prepopulateMomentModal} 
+                    />
+                  </div>
+                </div>
+              </div>
               <div className="col s12">
 	        <MomentEditModal 
 		  momentEditUrl={this.state.momentEditUrl}
