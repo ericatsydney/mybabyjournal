@@ -8617,6 +8617,7 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 nav.nav-extended {
   height: auto;
   position: relative;
+  z-index: 10;
 }
 
 .profile-current {
@@ -8636,12 +8637,11 @@ nav.nav-extended {
   position: absolute;
   top: 0;
   right: 0;
-  top: 0;
-  right: 0;
   bottom: 0;
   left: 0;
   opacity: .1;
   overflow: hidden;
+  z-index: -1;
 }
 
 nav .nav-background .ea {
@@ -8659,7 +8659,7 @@ nav .nav-background .ea {
 }
 
 .timeline {
-  border-left: 3px solid #00BCD4;
+  border-left: 3px solid #488EAD;
   border-bottom-right-radius: 2px;
   border-top-right-radius: 2px;
   position: relative;
@@ -8695,7 +8695,7 @@ nav .nav-background .ea {
   border-radius: 50%;
   background-clip: padding-box;
   background: #fff;
-  border: 3px solid #00BCD4;
+  border: 3px solid #488EAD;
 }
 
 .timeline .item:after {
@@ -8708,7 +8708,7 @@ nav .nav-background .ea {
   height: 10px;
   border-radius: 50%;
   background-clip: padding-box;
-  background: #00BCD4;
+  background: #488EAD;
   z-index: 10;
 }
 

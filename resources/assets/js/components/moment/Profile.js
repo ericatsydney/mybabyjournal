@@ -5,7 +5,7 @@ import PromiseStateContainer from '../app/PromiseStateContainer'
 import MomentEditModal from './MomentEditModal'
 import MomentDeleteModal from './MomentDeleteModal'
 import MomentList from './MomentList'
-import ProfileList from './ProfileInformation'
+import ProfileHeader from './ProfileHeader'
 
 
 class Profile extends Component {
@@ -44,7 +44,7 @@ class Profile extends Component {
           return (
             <div className="profile__info">
               <div className="col s12">
-	        <ProfileList 
+	        <ProfileHeader 
                   profiles={profiles} 
                   activeProfileId={profile.id}
                   onClickEvent={this.prepopulateMomentModal} 

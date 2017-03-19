@@ -1,32 +1,17 @@
 import React, { Component, PropTypes } from 'react'
+import NavMenu from '../app/NavigationMenu'
 import { Link } from 'react-router'
 
-class ProfileList extends Component {
+class ProfileHeader extends Component {
   render() {
     return (
-      <div className="profile-information"> 
+      <div className="moment-header"> 
         <nav className="nav-extended">
           <div className="nav-background">
             <div className="ea k"></div>
           </div>
           <div className="container">
-            <a className="brand-logo" href="#">My Baby Journal</a>
-            <a href="#" data-activates="mobile-demo" className="button-collapse"><i className="material-icons">menu</i></a>
-            <ul id="nav-mobile" className="right hide-on-med-and-down">
-              <li>
-                <a ref="/profiles/1">Profiles</a>
-              </li>
-              <li>
-                <a ref="/profiles/6">Albums</a>
-              </li>
-            </ul>
-
-            <ul className="side-nav" id="mobile-demo">
-              <li><a href="sass.html">Sass</a></li>
-              <li><a href="badges.html">Components</a></li>
-              <li><a href="collapsible.html">Javascript</a></li>
-              <li><a href="mobile.html">Mobile</a></li>
-            </ul>
+            <NavMenu/>
             {
               this.props.profiles.map(profile =>  
                 <ProfileListItem 
@@ -86,14 +71,14 @@ class ProfileListItem extends Component {
     if (this.props.activeId === this.props.profileId) {
     return (
       <div className="row profile-current">
-        <Link to={`/profiles/${this.props.profileId}`} className={`profile-list__item ${classes}`}>
+        <div className={`profile-list__item ${classes}`}>
           <div className="profile-avatar col s12">
             <ProfileAvatar avatar={this.props.avatar}/> 
           </div>
           <div className={`profile-list__item-name col s12 ${classes}`}>
             {this.props.firstName} {this.props.lastName}
           </div>
-        </Link>
+        </div>
       </div>
     );
     }
@@ -111,4 +96,4 @@ class ProfileAvatar extends Component {
   }
 }
 
-export default ProfileList;
+export default ProfileHeader;
