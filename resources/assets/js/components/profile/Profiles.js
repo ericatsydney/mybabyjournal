@@ -13,16 +13,26 @@ class Profiles extends Component {
         onFulfillment={([profiles]) => {
           return (
             <div>
-              <Header/>
-              <ul>
+              <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Option</th>
+                </tr>
+              </thead>
+              <tbody>
                 {profiles.map((profile) => {
                   return (
-                    <li key={profile.id}>
-                      <Link to={`/profiles/${profile.id}`}>{profile.first_name}{profile.last_name}</Link>
-                    </li>
+                    <tr>
+                      <td>
+                        <Link to={`/profiles/${profile.id}`}>{profile.first_name}{profile.last_name}</Link>
+                      </td>
+                      <td>button goes here</td>
+                    </tr>
                   )
                 })}
-              </ul>
+              </tbody>
+              </table>
             </div>
           )
         }}

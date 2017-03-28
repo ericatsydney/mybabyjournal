@@ -8659,7 +8659,7 @@ nav .nav-background .ea {
 }
 
 .timeline {
-  border-left: 3px solid #488EAD;
+  border-left: 3px solid #81d4fa;
   border-bottom-right-radius: 2px;
   border-top-right-radius: 2px;
   position: relative;
@@ -8695,7 +8695,7 @@ nav .nav-background .ea {
   border-radius: 50%;
   background-clip: padding-box;
   background: #fff;
-  border: 3px solid #488EAD;
+  border: 3px solid #81d4fa;
 }
 
 .timeline .item:after {
@@ -8708,7 +8708,7 @@ nav .nav-background .ea {
   height: 10px;
   border-radius: 50%;
   background-clip: padding-box;
-  background: #488EAD;
+  background: #81d4fa;
   z-index: 10;
 }
 
