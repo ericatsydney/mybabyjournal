@@ -13,11 +13,12 @@ class Profiles extends Component {
         onFulfillment={([profiles]) => {
           return (
             <div>
-              <table>
+              <Header />
+              <table className='container'>
               <thead>
                 <tr>
                   <th>Name</th>
-                  <th>Option</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -25,9 +26,22 @@ class Profiles extends Component {
                   return (
                     <tr>
                       <td>
-                        <Link to={`/profiles/${profile.id}`}>{profile.first_name}{profile.last_name}</Link>
+                        <Link to={`/profiles/${profile.id}`}>{profile.first_name} {profile.last_name}</Link>
                       </td>
-                      <td>button goes here</td>
+                      <td>
+                        <Link 
+                          className="btn-floating red waves-effect waves-light modal-trigger" 
+                          data-target="momentEditModal"
+                          to={`/profiles/${profile.id}/edit`}
+                        >
+                          <i className="material-icons">mode_edit</i>
+                        </Link>
+                        <Link 
+                          className="btn-floating grey waves-effect waves-light" 
+                        >
+                          <i className="material-icons">delete</i>
+                        </Link>
+                      </td>
                     </tr>
                   )
                 })}
