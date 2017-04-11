@@ -3,9 +3,9 @@ import { connect, PromiseState } from 'react-refetch'
 import { Link } from 'react-router'
 import PromiseStateContainer from '../app/PromiseStateContainer'
 import Header from '../app/Header'
+import ProfileDeleteModal from './ProfileDeleteModal'
 
 class Profiles extends Component {
-
   render() {
     return (
       <PromiseStateContainer
@@ -14,6 +14,8 @@ class Profiles extends Component {
           return (
             <div>
               <Header />
+              <ProfileDeleteModal 
+              />
               <table className='container'>
               <thead>
                 <tr>
@@ -31,13 +33,13 @@ class Profiles extends Component {
                       <td>
                         <Link 
                           className="btn-floating red waves-effect waves-light modal-trigger" 
-                          data-target="momentEditModal"
                           to={`/profiles/${profile.id}/edit`}
                         >
                           <i className="material-icons">mode_edit</i>
                         </Link>
                         <Link 
                           className="btn-floating grey waves-effect waves-light" 
+                          data-target="profileDeleteModal"
                         >
                           <i className="material-icons">delete</i>
                         </Link>
@@ -53,7 +55,6 @@ class Profiles extends Component {
       />
     )
   }
-
 }
 
 export default connect(props => ({

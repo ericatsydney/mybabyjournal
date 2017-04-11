@@ -31,8 +31,7 @@ class MomentListItem extends Component {
             </Link>
             <Link 
               className="btn-floating grey waves-effect waves-light" 
-              data-toggle="modal" 
-              data-target="#momentDeleteModal"
+              data-target="momentDeleteModal"
               onClick={this.clickCallback}>
               <i className="material-icons">delete</i>
             </Link>

@@ -2,48 +2,48 @@ import React, { Component, PropTypes } from 'react'
 import { connect, PromiseState } from 'react-refetch'
 import { Link } from 'react-router'
 import PromiseStateContainer from '../app/PromiseStateContainer'
+import Header from '../app/Header'
 
 class ProfileEditForm extends Component {
   render() {
     let updateUri = `/api/profiles/${this.props.profile.id}`;
     return (
       <div className="profile-edit-form"> 
+        <div className="container">
         <form action={updateUri} method="POST" encType="multipart/form-data">
           <input type="hidden" name="_method" value="PUT" />
-          <div className="form-group">
-            <label for="firstName">First name</label>
-            <input type="text" className="form-control" id="firstName" name="first_name" placeholder="Enter first name" ref={(input) => this.input = input} defaultValue={this.props.profile.first_name}/>
+          <div className="input-field">
+            <input type="text" id="firstName" name="first_name" placeholder="Enter first name" ref={(input) => this.input = input} defaultValue={this.props.profile.first_name}/>
+            <label htmlFor="firstName">First name</label>
           </div>
-          <div className="form-group">
-            <label for="lastName">Last name</label>
-            <input type="text" className="form-control" id="lastName" name="last_name" placeholder="Enter last name" ref={(input) => this.input = input} defaultValue={this.props.profile.last_name}/>
+          <div className="input-field">
+            <input type="text" id="lastName" name="last_name" placeholder="Enter last name" ref={(input) => this.input = input} defaultValue={this.props.profile.last_name}/>
+            <label htmlFor="lastName">Last name</label>
           </div>
-          <div className="form-group">
-            <label for="dateOfBirth">Date of birth</label>
-            <input type="text" className="form-control" id="dateOfBirth" name="date_of_birth" placeholder="yyyy-MM-dd" ref={(input) => this.input = input} defaultValue={this.props.profile.date_of_birth}/>
+          <div className="input-field">
+            <input type="text" id="dateOfBirth" name="date_of_birth" placeholder="yyyy-MM-dd" ref={(input) => this.input = input} defaultValue={this.props.profile.date_of_birth}/>
+            <label htmlFor="dateOfBirth">Date of birth</label>
           </div>
-	  <div className="form-group">
-	    <label for="avatar">Avatar</label>
+	  <div className="input-field">
             <div className="row">
-	       <img src={this.props.profile.avatar} className="img-circle pull-left" />
+	       <img src={this.props.profile.avatar} className="circle" width="100" height="100"/>
 	       <input type="file" className="form-control-file" id="avatar" name="avatar" />
             </div>
+	    <label htmlFor="avatar">Avatar</label>
 	  </div>
-	  <fieldset className="form-group">
-	    <legend>Gender</legend>
-	    <div className="form-check">
-	      <label className="form-check-label">
-		<input type="radio" className="form-check-input" name="gender" id="genderBoy" value="boy" ref={(input) => this.input = input} defaultChecked={this.props.profile.gender === 'boy'}/>Boy
-	      </label>
-	    </div>
-	    <div className="form-check">
-	      <label className="form-check-label">
-		<input type="radio" className="form-check-input" name="gender" id="genderGirl" value="girl" ref={(input) => this.input = input} defaultChecked={this.props.profile.gender === 'girl'}/>Girl
-	      </label>
-	    </div>
+	  <fieldset className="input-field">
+            <p>
+              <input name="gender" type="radio" id="genderBoy" value="boy" ref={(input) => this.input = input} defaultChecked={this.props.profile.gender === 'boy'} />
+              <label htmlFor="genderBoy">Boy</label>
+            </p>
+            <p>
+              <input name="gender" type="radio" id="genderGirl" value="girl" ref={(input) => this.input = input} defaultChecked={this.props.profile.gender === 'girl'} />
+              <label htmlFor="genderGirl">girl</label>
+            </p>
           </fieldset>
           <button type="submit" className="btn btn-primary">Submit</button>
         </form>
+        </div>
       </div>);
   }
 }
@@ -56,9 +56,8 @@ class ProfileEdit extends Component {
         onFulfillment={([profile]) => {
           return (
             <div className="profile__info">
-              <div className="col-xs-12">
-	        <ProfileEditForm profile={profile}/>
-	      </div>
+              <Header />
+              <ProfileEditForm profile={profile}/>
 	    </div>
           )
         }}
