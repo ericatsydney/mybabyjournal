@@ -30,23 +30,22 @@ class MomentEditModal extends Component {
         <div className="modal-content">
           <form action={this.props.momentEditUrl} method="POST" encType="multipart/form-data">
             {hiddenMethod}
-            <div className="md-form">
+            <div className="input-field">
               <input 
                 type="text" 
-                className="form-control" 
-                id="name" 
+                id="moment-name" 
                 name="name" 
                 placeholder="Enter name" 
                 value={this.props.momentName}
                 ref={(input) => this.momentName = input}
                 onChange={this.handleChange}
               />
-              <label htmlFor="name" className="active">First name</label>
+              <label htmlFor="moment-name" className="active">Name of the moment</label>
             </div>
-            <div className="md-form">
+            <div className="input-field">
               <textarea 
                 type="text" 
-                className="form-control md-textarea" 
+                className="materialize-textarea" 
                 id="description" 
                 name="description" 
                 placeholder="Enter description" 

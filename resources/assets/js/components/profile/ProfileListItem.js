@@ -8,8 +8,6 @@ class ProfileListItem extends Component {
   }
 
   clickCallback() {
-    console.log('1111111111')
-    console.log(this.props.profileId)
     this.props.onClickEvent(this.props.profileId)
   }
 

@@ -13,23 +13,44 @@ class ProfileEditForm extends Component {
         <form action={updateUri} method="POST" encType="multipart/form-data">
           <input type="hidden" name="_method" value="PUT" />
           <div className="input-field">
-            <input type="text" id="firstName" name="first_name" placeholder="Enter first name" ref={(input) => this.input = input} defaultValue={this.props.profile.first_name}/>
-            <label htmlFor="firstName">First name</label>
+            <input 
+              type="text" 
+              id="firstName" 
+              name="first_name" 
+              placeholder="Enter first name" 
+              ref={(input) => this.input = input} 
+              defaultValue={this.props.profile.first_name}
+            />
+            <label htmlFor="firstName" className="active">First name</label>
           </div>
           <div className="input-field">
-            <input type="text" id="lastName" name="last_name" placeholder="Enter last name" ref={(input) => this.input = input} defaultValue={this.props.profile.last_name}/>
-            <label htmlFor="lastName">Last name</label>
+            <input 
+              type="text" 
+              id="lastName"
+              name="last_name"
+              placeholder="Enter last name"
+              ref={(input) => this.input = input} 
+              defaultValue={this.props.profile.last_name}
+            />
+            <label htmlFor="lastName" className="active">Last name</label>
           </div>
           <div className="input-field">
-            <input type="text" id="dateOfBirth" name="date_of_birth" placeholder="yyyy-MM-dd" ref={(input) => this.input = input} defaultValue={this.props.profile.date_of_birth}/>
-            <label htmlFor="dateOfBirth">Date of birth</label>
+            <input 
+              type="text"
+              id="dateOfBirth"
+              name="date_of_birth"
+              placeholder="yyyy-MM-dd"
+              ref={(input) => this.input = input} 
+              defaultValue={this.props.profile.date_of_birth}
+            />
+            <label htmlFor="dateOfBirth" className="active">Date of birth</label>
           </div>
 	  <div className="input-field">
             <div className="row">
 	       <img src={this.props.profile.avatar} className="circle" width="100" height="100"/>
 	       <input type="file" className="form-control-file" id="avatar" name="avatar" />
             </div>
-	    <label htmlFor="avatar">Avatar</label>
+	    <label htmlFor="avatar" className="active">Avatar</label>
 	  </div>
 	  <fieldset className="input-field">
             <p>
