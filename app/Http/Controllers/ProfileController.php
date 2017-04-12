@@ -60,10 +60,14 @@ class ProfileController extends Controller
 	// Delete the related moments as well.
         $number_of_deleted_moments = Moment::where('profile_id', $id)->delete();
         if($number_of_deleted_moments > 0) {
-          return 'Delete succeed and with related ' . $number_of_deleted_moments . ' moments';
+          // @todo pass the message to callout.
+          //return 'Delete succeed and with related ' . $number_of_deleted_moments . ' moments';
+	  return redirect('profiles');
 	}
 	else {
-	  return 'Delete succeed without any moments related';
+          // @todo pass the message to callout.
+	  //return 'Delete succeed without any moments related';
+	  return redirect('profiles');
 	}
       }
       else {
@@ -80,14 +84,21 @@ class ProfileController extends Controller
    */
   public function update(Request $request, $id) {
       $profile = Profile::findOrFail($id);
-      $file = $request->file('avatar');
-      //@todo this will be uncomment after testing.
-      //$file_path = $file->storeAs('avatars/' . auth()->id(),  'avatar.png');
-      $file_path = $file->storeAs('avatars/' . $id,  'avatar.png');
       $result = $request->all();
-      //@todo this will be uncomment after testing.
-      //$result['avatar'] = 'avatars/' . auth()->id() . '/avatar.png';
-      $result['avatar'] = '/avatars/' . $id . '/avatar.png';
+      $file = $request->file('avatar');
+
+      // If avatar is not updated
+      if (empty($file)) {
+        unset($result['avatar']);
+      }
+      else {
+        //@todo this will be uncomment after testing.
+        //$file_path = $file->storeAs('avatars/' . auth()->id(),  'avatar.png');
+        $file_path = $file->storeAs('avatars/' . $id,  'avatar.png');
+        //@todo this will be uncomment after testing.
+        //$result['avatar'] = 'avatars/' . auth()->id() . '/avatar.png';
+        $result['avatar'] = '/avatars/' . $id . '/avatar.png';
+      }
 
       if ($profile->update($result)) {
 	return redirect('profiles/'. $id . '/edit');
