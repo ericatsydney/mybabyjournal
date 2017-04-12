@@ -4,8 +4,23 @@ import { Link } from 'react-router'
 import PromiseStateContainer from '../app/PromiseStateContainer'
 import Header from '../app/Header'
 import ProfileDeleteModal from './ProfileDeleteModal'
+import ProfileListItem from './ProfileListItem'
 
 class Profiles extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      deleteProfileId: null
+    }
+    this.updateProfileId = this.updateProfileId.bind(this)
+  }
+
+  updateProfileId(profileId) {
+    this.setState({
+      deleteProfileId: profileId
+    })
+  }
+
   render() {
     return (
       <PromiseStateContainer
@@ -15,6 +30,7 @@ class Profiles extends Component {
             <div>
               <Header />
               <ProfileDeleteModal 
+                profileId={this.state.deleteProfileId}
               />
               <table className='container'>
               <thead>
@@ -25,26 +41,12 @@ class Profiles extends Component {
               </thead>
               <tbody>
                 {profiles.map((profile) => {
-                  return (
-                    <tr>
-                      <td>
-                        <Link to={`/profiles/${profile.id}`}>{profile.first_name} {profile.last_name}</Link>
-                      </td>
-                      <td>
-                        <Link 
-                          className="btn-floating red waves-effect waves-light modal-trigger" 
-                          to={`/profiles/${profile.id}/edit`}
-                        >
-                          <i className="material-icons">mode_edit</i>
-                        </Link>
-                        <Link 
-                          className="btn-floating grey waves-effect waves-light" 
-                          data-target="profileDeleteModal"
-                        >
-                          <i className="material-icons">delete</i>
-                        </Link>
-                      </td>
-                    </tr>
+                  return (<ProfileListItem 
+                    profileId = {profile.id}
+                    profileFirstName = {profile.first_name}
+                    profileLastName = {profile.last_name}
+                    onClickEvent = {this.updateProfileId}
+                  />
                   )
                 })}
               </tbody>
