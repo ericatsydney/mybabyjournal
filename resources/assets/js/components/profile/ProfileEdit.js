@@ -11,57 +11,80 @@ class ProfileEditForm extends Component {
       <div className="profile-edit-form"> 
         <div className="container">
         <form action={updateUri} method="POST" encType="multipart/form-data">
-          <input type="hidden" name="_method" value="PUT" />
-          <div className="input-field">
-            <input 
-              type="text" 
-              id="firstName" 
-              name="first_name" 
-              placeholder="Enter first name" 
-              ref={(input) => this.input = input} 
-              defaultValue={this.props.profile.first_name}
-            />
-            <label htmlFor="firstName" className="active">First name</label>
-          </div>
-          <div className="input-field">
-            <input 
-              type="text" 
-              id="lastName"
-              name="last_name"
-              placeholder="Enter last name"
-              ref={(input) => this.input = input} 
-              defaultValue={this.props.profile.last_name}
-            />
-            <label htmlFor="lastName" className="active">Last name</label>
-          </div>
-          <div className="input-field">
-            <input 
-              type="text"
-              id="dateOfBirth"
-              name="date_of_birth"
-              placeholder="yyyy-MM-dd"
-              ref={(input) => this.input = input} 
-              defaultValue={this.props.profile.date_of_birth}
-            />
-            <label htmlFor="dateOfBirth" className="active">Date of birth</label>
-          </div>
-	  <div className="input-field">
-            <div className="row">
-	       <img src={this.props.profile.avatar} className="circle" width="100" height="100"/>
-	       <input type="file" className="form-control-file" id="avatar" name="avatar" />
+          <div className="row">
+            <input type="hidden" name="_method" value="PUT" />
+            <div className="input-field">
+              <input 
+                type="text" 
+                id="firstName" 
+                name="first_name" 
+                placeholder="Enter first name" 
+                ref={(input) => this.input = input} 
+                defaultValue={this.props.profile.first_name}
+              />
+              <label htmlFor="firstName" className="active">First name</label>
             </div>
-	    <label htmlFor="avatar" className="active">Avatar</label>
-	  </div>
-	  <fieldset className="input-field">
-            <p>
-              <input name="gender" type="radio" id="genderBoy" value="boy" ref={(input) => this.input = input} defaultChecked={this.props.profile.gender === 'boy'} />
-              <label htmlFor="genderBoy">Boy</label>
-            </p>
-            <p>
-              <input name="gender" type="radio" id="genderGirl" value="girl" ref={(input) => this.input = input} defaultChecked={this.props.profile.gender === 'girl'} />
-              <label htmlFor="genderGirl">girl</label>
-            </p>
-          </fieldset>
+            <div className="input-field">
+              <input 
+                type="text" 
+                id="lastName"
+                name="last_name"
+                placeholder="Enter last name"
+                ref={(input) => this.input = input} 
+                defaultValue={this.props.profile.last_name}
+              />
+              <label htmlFor="lastName" className="active">Last name</label>
+            </div>
+            <div className="input-field">
+              <input 
+                type="text"
+                id="dateOfBirth"
+                name="date_of_birth"
+                placeholder="yyyy-MM-dd"
+                ref={(input) => this.input = input} 
+                defaultValue={this.props.profile.date_of_birth}
+              />
+              <label htmlFor="dateOfBirth" className="active">Date of birth</label>
+            </div>
+            <div className="input-field">
+              <label className="active">Gender</label>
+              <p>
+                <input 
+                  name="gender"
+                  type="radio"
+                  id="genderBoy" 
+                  value="boy" 
+                  ref={(input) => this.input = input} 
+                  defaultChecked={this.props.profile.gender === 'boy'} 
+                />
+                <label htmlFor="genderBoy">Boy</label>
+              </p>
+              <p>
+                <input name="gender" 
+                  type="radio" 
+                  id="genderGirl" 
+                  value="girl" 
+                  ref={(input) => this.input = input}
+                  defaultChecked={this.props.profile.gender === 'girl'} 
+                />
+                <label htmlFor="genderGirl">Girl</label>
+              </p>
+            </div>
+          </div>
+          <div className="row">
+            <img src={this.props.profile.avatar} className="circle" width="100" height="100"/>
+          </div>
+          <div className="row">
+            <div className="file-field input-field">
+              <div className="btn">
+                <span>File</span>
+                <input id="avatar" name="avatar" type="file" />
+              </div>
+              <div className="file-path-wrapper">
+                <input id="avatar" name="avatar" className="file-path validate" type="text" placeholder="Upload avatar"/>
+              </div>
+            </div>
+          </div>
           <button type="submit" className="btn btn-primary">Submit</button>
         </form>
         </div>

@@ -55,10 +55,15 @@ class MomentEditModal extends Component {
               />
               <label htmlFor="descrption" className="active">Description</label>
             </div>
-            <div className="form-group">
-              <label htmlFor="photos">Avatar</label>
-              <input type="file" className="form-control-file" id="photos" name="photos" />
-              <img src={this.props.avatar} className="img-circle pull-left" />
+            <img src={this.props.avatar} className="img-circle pull-left" />
+            <div className="file-field input-field">
+              <div className="btn">
+                <span>File</span>
+                <input type="file" multiple/>
+              </div>
+              <div className="file-path-wrapper">
+                <input id="photos" name="photos" className="file-path validate" type="text" placeholder="Upload one or more files"/>
+              </div>
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>
           </form>
