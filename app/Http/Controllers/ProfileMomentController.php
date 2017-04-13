@@ -92,21 +92,33 @@ class ProfileMomentController extends Controller
     public function update(Request $request, $profile_id, $id) {
       // @todo check the profile_id
       $moment = Moment::findOrFail($id);
-      $file = $request->file('photos');
+      $photos = $request->file('photos');
       $result = $request->all();
-      if (is_null($file)) {
-        $result['photos'] = $moment->photos;
+
+      // If the photos not updated in the form.
+      if (!$request->hasFile('photos')) {
+        // Not update this field to the DB.
+        unset($result['photos']);
       }
       else {
-        $file_path = $file->store('photos');
-        $result['photos'] = $file_path;
+        $files = array();
+        foreach($photos as $photo) {
+          // Set the original name as the index.
+          $file_name_array = explode('.', $photo->getClientOriginalName());
+          // Set the path as the value.
+          $file_path = $photo->store('photos');
+          // Construct the array of the photos.
+          $files[$file_name_array[0]] = $file_path;
+        }
+        // Serialize the result as json.
+        $result['photos'] = json_encode($files);
       }
 
       if ($moment->update($result)) {
-	return redirect('profiles/'. $profile_id);
+        return redirect('profiles/'. $profile_id);
       }
       else {
-	return 'Fail';
+        return 'Fail';
       }
     }
 

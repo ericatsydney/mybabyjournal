@@ -59,10 +59,10 @@ class MomentEditModal extends Component {
             <div className="file-field input-field">
               <div className="btn">
                 <span>File</span>
-                <input type="file" multiple/>
+                <input id="photos" name="photos[]" type="file" multiple/>
               </div>
               <div className="file-path-wrapper">
-                <input id="photos" name="photos" className="file-path validate" type="text" placeholder="Upload one or more files"/>
+                <input className="file-path validate" type="text" placeholder="Upload one or more files"/>
               </div>
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>

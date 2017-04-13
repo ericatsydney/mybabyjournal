@@ -88,7 +88,7 @@ class ProfileController extends Controller
       $file = $request->file('avatar');
 
       // If avatar is not updated
-      if (empty($file)) {
+      if (!$request->hasFile('avatar')) {
         unset($result['avatar']);
       }
       else {
