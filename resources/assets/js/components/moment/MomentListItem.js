@@ -42,7 +42,9 @@ class MomentListItem extends Component {
             Brisbane
           </div>
 	  <div className="col-xs-5">
-            <MomentPhotosThumnail/> 
+            <MomentPhotosThumnail
+              photos={this.props.photos}
+            /> 
 	  </div>
 	</div>
       </li>

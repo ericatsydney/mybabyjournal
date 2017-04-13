@@ -38,6 +38,22 @@ Route::get('avatars/{profileId}/{filename}', function ($profileId, $filename)
     return $response;
 });
 
+// Photos routing.
+Route::get('photos/{filename}', function ($filename)
+{
+    $path = storage_path('app') . '/photos/' . $filename;
+
+    if(!File::exists($path)) abort(404);
+
+    $file = File::get($path);
+    $type = File::mimeType($path);
+
+    $response = Response::make($file, 200);
+    $response->header("Content-Type", $type);
+
+    return $response;
+});
+
 // This is the index template for react routing.
 Route::get('{slug}', function() {
     return view('index');

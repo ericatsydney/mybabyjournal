@@ -25,6 +25,11 @@ class MomentEditModal extends Component {
     if (pattern.test(this.props.momentEditUrl)) {
       hiddenMethod = null;
     }
+    //const photos = JSON.parse(this.props.momentPhotos)
+    //let paths = [];
+    //for(var name in photos){
+    //  paths.push('/' + photos[name]);
+    //}
     return (
       <div className="modal" id="momentEditModal">
         <div className="modal-content">
@@ -55,7 +60,6 @@ class MomentEditModal extends Component {
               />
               <label htmlFor="descrption" className="active">Description</label>
             </div>
-            <img src={this.props.avatar} className="img-circle pull-left" />
             <div className="file-field input-field">
               <div className="btn">
                 <span>File</span>
