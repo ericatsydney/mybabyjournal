@@ -12,11 +12,6 @@ class ProfilesTableSeeder extends Seeder
      */
     public function run()
     {
-      $faker = Faker::create();
-      DB::table('profiles')->insert([
-          'first_name' => $faker->firstName,
-          'last_name' => $faker->lastName,
-          'date_of_birth' => $faker->date,
-      ]);
+      factory(App\Profile::class, 3)->create();
     }
 }
