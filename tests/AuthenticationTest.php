@@ -6,7 +6,6 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class AuthenticationTest extends TestCase
 {
-    use DatabaseTransactions;
 
     /**
      * Test the passport authentication.

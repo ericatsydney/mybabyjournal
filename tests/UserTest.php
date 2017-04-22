@@ -6,6 +6,8 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class UserTest extends TestCase
 {
+    use DatabaseTransactions;
+
     /**
      * A basic test example.
      *
@@ -26,8 +28,8 @@ class UserTest extends TestCase
      */
     public function testRegisterPage() {
       $this->visit('/register')
-        ->type('eric2', 'name')
-        ->type('eric2@gmail.com', 'email')
+        ->type('eric3', 'name')
+        ->type('eric3@gmail.com', 'email')
         ->type('abc123', 'password')
         ->type('abc123', 'password_confirmation')
         ->press('Register')
