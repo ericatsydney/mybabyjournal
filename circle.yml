@@ -7,4 +7,10 @@ machine:
 test:
   override:
     - php --version
-    - ./vendor/bin/phpunit
+    - ./vendor/bin/phpunit tests/ci
+
+deployment:
+  production:
+    branch: master
+    commands:
+      - ssh root@139.59.113.228 /root/scripts/pull-master.sh
