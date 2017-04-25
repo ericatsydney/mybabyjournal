@@ -7,6 +7,7 @@ machine:
 test:
   override:
     - php --version
+    - php artisan key:generate
     - ./vendor/bin/phpunit tests/ci
 
 deployment:
