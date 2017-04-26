@@ -4,6 +4,10 @@ machine:
   php:
     version: 7.1.0
 
+database:
+  override:
+    - mysql -u root -e "create database ci_test"
+
 test:
   override:
     - whereis mysql
