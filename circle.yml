@@ -6,8 +6,8 @@ machine:
 
 test:
   override:
-    - php --version
-    - mv .env.example .env
+    - whereis mysql
+    - mv .env.ci .env
     - php artisan key:generate
     - php artisan migrate
     - ./vendor/bin/phpunit tests/ci
