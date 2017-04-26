@@ -13,13 +13,13 @@ class UserTest extends TestCase
      *
      * @return void
      */
-    public function testLoginPage() {
-      $this->visit('/login')
-        ->type('eric@gmail.com', 'email')
-        ->type('abc123', 'password')
-        ->press('Login')
-        ->seePageIs('/home');
-    }
+    //public function testLoginPage() {
+    //  $this->visit('/login')
+    //    ->type('eric@gmail.com', 'email')
+    //    ->type('abc123', 'password')
+    //    ->press('Login')
+    //    ->seePageIs('/home');
+    //}
 
     /**
      * A basic test example.

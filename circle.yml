@@ -9,6 +9,7 @@ test:
     - php --version
     - mv .env.example .env
     - php artisan key:generate
+    - php artisan migrate
     - ./vendor/bin/phpunit tests/ci
 
 deployment:
