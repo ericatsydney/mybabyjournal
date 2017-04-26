@@ -12,7 +12,7 @@ class AuthenticationTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
+    public function testProfilePageAuth()
     {
       $user = factory(App\User::class)->create();
 

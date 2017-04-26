@@ -31,7 +31,7 @@ $factory->define(Profile::class, function (Faker $faker) {
     'first_name' => $faker->firstName,
     'last_name' => $faker->lastName,
     'gender' => 'girl',
-    'avatar' => 'avatar.jpg',
+    'avatar' => '\/avatars\/1\/avatar.png',
     'date_of_birth' => $faker->date,
   ];
 });

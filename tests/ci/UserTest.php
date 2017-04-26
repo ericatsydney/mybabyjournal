@@ -13,19 +13,6 @@ class UserTest extends TestCase
      *
      * @return void
      */
-    //public function testLoginPage() {
-    //  $this->visit('/login')
-    //    ->type('eric@gmail.com', 'email')
-    //    ->type('abc123', 'password')
-    //    ->press('Login')
-    //    ->seePageIs('/home');
-    //}
-
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
     public function testRegisterPage() {
       $this->visit('/register')
         ->type('eric3', 'name')
@@ -33,6 +20,19 @@ class UserTest extends TestCase
         ->type('abc123', 'password')
         ->type('abc123', 'password_confirmation')
         ->press('Register')
+        ->seePageIs('/home');
+    }
+
+    /**
+     * A basic test example.
+     *
+     * @return void
+     */
+    public function testLoginPage() {
+      $this->visit('/login')
+        ->type('eric3@gmail.com', 'email')
+        ->type('abc123', 'password')
+        ->press('Login')
         ->seePageIs('/home');
     }
 }

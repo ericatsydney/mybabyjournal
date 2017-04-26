@@ -27,7 +27,7 @@ class ProfileApiTest extends TestCase
     public function testProfile()
     {
       // Assert that each user in the list has at least an id, name and email attribute.
-      $this->get('/api/profiles/2')
+      $this->get('/api/profiles/1')
         ->seeJsonStructure([
           'id', 'first_name', 'last_name', 'gender', 'date_of_birth'
         ]); 
