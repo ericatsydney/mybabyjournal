@@ -31,7 +31,7 @@ $factory->define(Profile::class, function (Faker $faker) {
     'first_name' => $faker->firstName,
     'last_name' => $faker->lastName,
     'gender' => 'girl',
-    'avatar' => '\/avatars\/1\/avatar.png',
+    'avatar' => '/avatars/1/avatar.png',
     'date_of_birth' => $faker->date,
   ];
 });
@@ -43,7 +43,7 @@ $factory->define(Moment::class, function (Faker $faker) {
        return factory(App\Profile::class)->create()->id;
     },
     'description' => 'description goes here',
-    'photos' => '{\"title\":\"file\\\/path.png\"}',
+    'photos' => '{"title":"file/path.png"}',
   ];
 });
 
