@@ -43,7 +43,7 @@ $factory->define(Moment::class, function (Faker $faker) {
        return factory(App\Profile::class)->create()->id;
     },
     'description' => 'description goes here',
-    'photos' => '{test}',
+    'photos' => '{\"title\":\"file\\\/path.png\"}',
   ];
 });
 

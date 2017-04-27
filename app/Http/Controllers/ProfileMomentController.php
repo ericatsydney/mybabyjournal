@@ -37,17 +37,33 @@ class ProfileMomentController extends Controller
      */
     public function store(Request $request, $profile_id) {
       $moment = new Moment;
+
+      // Assign all the fields.
       $moment->name = $request->get('name');
-      $file = $request->file('photos');
-      if (is_null($file)) {
+      $photos = $request->file('photos');
+      $result = $request->all();
+
+      // If the photos not updated in the form.
+      if (!$request->hasFile('photos')) {
+        // Not update this field to the DB.
         $moment->photos = '';
       }
       else {
-        $file_path = $file->store('photos');
-        $moment->photos = $file_path;
+        $files = array();
+        foreach($photos as $photo) {
+          // Set the original name as the index.
+          $file_name_array = explode('.', $photo->getClientOriginalName());
+          // Set the path as the value.
+          $file_path = $photo->store('photos');
+          // Construct the array of the photos.
+          $files[$file_name_array[0]] = $file_path;
+        }
+        // Serialize the result as json.
+        $moment->photos = json_encode($files);
       }
       $moment->description = $request->get('description');
       $moment->profile_id = $profile_id;
+
       if ($moment->save()) {
 	return redirect('profiles/'. $profile_id);
       }

@@ -10,10 +10,10 @@ database:
 
 test:
   override:
-    - whereis mysql
     - mv .env.ci .env
     - php artisan key:generate
     - php artisan migrate
+    - php artisan db:seed --class=MomentsTableSeeder
     - ./vendor/bin/phpunit tests/ci
 
 deployment:

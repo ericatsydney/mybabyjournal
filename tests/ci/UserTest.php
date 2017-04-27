@@ -28,11 +28,13 @@ class UserTest extends TestCase
      *
      * @return void
      */
-    public function testLoginPage() {
-      $this->visit('/login')
-        ->type('eric3@gmail.com', 'email')
-        ->type('abc123', 'password')
-        ->press('Login')
-        ->seePageIs('/home');
-    }
+    //public function testLoginPage() {
+    //  $user = factory(App\User::class)->create();
+
+    //  $this->visit('/login')
+    //    ->type($user->email, 'email')
+    //    ->type($user->password, 'password')
+    //    ->press('Login')
+    //    ->seePageIs('/home');
+    //}
 }
