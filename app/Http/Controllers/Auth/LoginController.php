@@ -48,7 +48,7 @@ class LoginController extends Controller
      * Obtain user information from Facebook.
      */
     public function handleProviderCallback() {
-      $user = Socialite::driver('github')->user();
+      $user = Socialite::driver('facebook')->user();
 
       // OAuth Two Providers
       $token = $user->token;
