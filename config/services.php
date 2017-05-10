@@ -35,4 +35,10 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'facebook' => [
+      'client_id' => '701252076615363',
+      'client_secret' => 'ea1e93c5aee759f0973602dd9b7618b1',
+      'redirect' => 'http://dev.3dcraft.com.au/login/facebook/callback',
+    ],
+
 ];

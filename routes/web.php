@@ -54,8 +54,13 @@ Route::get('photos/{filename}', function ($filename)
     return $response;
 });
 
+// This is the social login for Facebook.
+Route::get('login/facebook', 'Auth\LoginController@redirectToProvider');
+Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderCallback');
+
 // This is the index template for react routing.
 Route::get('{slug}', function() {
     return view('index');
 })
 ->where('slug', '(?!api)([A-z\d-\/_.]+)?');
+

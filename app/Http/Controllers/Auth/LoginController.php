@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Socialite;
 
 class LoginController extends Controller
 {
@@ -32,8 +33,35 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->middleware('guest', ['except' => 'logout']);
+    }
+
+    /**
+     * Redirect user to Facebook authentication page.
+     */
+    public function redirectToProvider() {
+      return Socialite::driver('facebook')->redirect();
+    }
+
+    /**
+     * Obtain user information from Facebook.
+     */
+    public function handleProviderCallback() {
+      $user = Socialite::driver('github')->user();
+
+      // OAuth Two Providers
+      $token = $user->token;
+      $refreshToken = $user->refreshToken; // not always provided
+      $expiresIn = $user->expiresIn;
+      
+      // All Providers
+      $user->getId();
+      $user->getNickname();
+      $user->getName();
+      $user->getEmail();
+      $user->getAvatar();
+
+      dd($user);
     }
 }
